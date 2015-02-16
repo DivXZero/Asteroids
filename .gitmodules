@@ -1,3 +1,4 @@
 [submodule "dependencies/SFML"]
 	path = dependencies/SFML
 	url = https://github.com/LaurentGomila/SFML.git
+	ignore = dirty

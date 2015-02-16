@@ -3,4 +3,4 @@ build/*
 *.suo
 dependencies/Box2D/Build/vs2012/bin/*
 dependencies/Box2D/Build/vs2012/obj/*
-dependencies/SFML/*
+dependencies/SFML/
