@@ -13,6 +13,12 @@ set(BOX2D_INCLUDE_DIR "dependencies/Box2D")
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 
+find_package(OpenGL)
+if(OPENGL_FOUND)
+	message("OpenGL Found")
+	target_link_libraries(${PROJECT_NAME} ${OPENGL_LIBRARIES})
+endif()
+
 find_package(SFML 2 REQUIRED system window graphics audio)
 if(SFML_FOUND)
 	include_directories(${SFML_INCLUDE_DIR})
