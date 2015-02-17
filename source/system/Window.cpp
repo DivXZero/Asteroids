@@ -1,6 +1,6 @@
 
 #include <stdio.h>
-#include "Window.h"
+#include "system\Window.h"
 
 Window::Window()
 {

@@ -3,25 +3,42 @@ cmake_minimum_required(VERSION 3.1.0)
 set(PROJECT_NAME "Asteroids")
 project(${PROJECT_NAME})
 
+# HEADERS
+
+set(SYSTEM_HEADER_FILES
+	include/system/Window.h
+)
+
 set(HEADER_FILES
+	${SYSTEM_HEADER_FILES}
 	include/Asteroids.h
-	include/system/Window.h)
+)
+
+# SOURCE
+
+set(SYSTEM_SOURCE_FILES
+	source/system/Window.cpp
+)
 
 set(SOURCE_FILES
+	${SYSTEM_SOURCE_FILES}
 	source/main.cpp
 	source/Asteroids.cpp
-	source/system/Window.cpp)
+)
 
 add_executable(${PROJECT_NAME} ${SOURCE_FILES} ${HEADER_FILES})
+
+source_group("Header Files\\System" FILES ${SYSTEM_HEADER_FILES})
+source_group("Source Files\\System" FILES ${SYSTEM_SOURCE_FILES})
 
 set(SFML_INCLUDE_DIR "dependencies/SFML/include")
 set(BOX2D_INCLUDE_DIR "dependencies/Box2D")
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 
-find_package(OpenGL)
+find_package(OpenGL REQUIRED)
 if(OPENGL_FOUND)
-	message("OpenGL Found")
+	message(STATUS "OpenGL Found")
 	target_link_libraries(${PROJECT_NAME} ${OPENGL_LIBRARIES})
 endif()
 
@@ -33,7 +50,7 @@ endif()
 
 find_package(Box2D REQUIRED)
 if(BOX2D_FOUND)
-	message("Box2D Found")
+	message(STATUS "Box2D Found")
 	include_directories(${BOX2D_INCLUDE_DIR})
 	target_link_libraries(${PROJECT_NAME} ${BOX2D_LIBRARIES})
 endif()
