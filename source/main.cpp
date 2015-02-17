@@ -1,7 +1,4 @@
 
-#include <SFML/OpenGL.hpp>
-#include <SFML/Graphics.hpp>
-#include <Box2D/Box2D.h>
 #include "game/Asteroids.h"
 
 int main(int argc, char** argv[])

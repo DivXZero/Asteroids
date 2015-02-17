@@ -8,6 +8,7 @@ project(${PROJECT_NAME})
 set(GAME_HEADER_FILES
 	include/game/Asteroids.h
 	include/game/Scene.h
+	include/game/Ship.h
 )
 
 set(SYSTEM_HEADER_FILES
@@ -26,6 +27,7 @@ set(HEADER_FILES
 set(GAME_SOURCE_FILES
 	source/game/Asteroids.cpp
 	source/game/Scene.cpp
+	source/game/Ship.cpp
 )
 
 set(SYSTEM_SOURCE_FILES

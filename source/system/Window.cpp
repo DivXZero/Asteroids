@@ -20,6 +20,7 @@ Window::~Window()
 
 bool Window::init()
 {
+	m_ContextSettings.antialiasingLevel = 8;
 	m_VideoMode = sf::VideoMode(m_Width, m_Height);
 	m_Style = (m_isFullscreen) ? sf::Style::Fullscreen : sf::Style::Close;
 	m_Window.create(m_VideoMode, m_Title, m_Style, m_ContextSettings);

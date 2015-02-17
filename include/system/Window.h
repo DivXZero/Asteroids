@@ -18,6 +18,10 @@ public:
 	void close();
 	bool pollEvent(Event &event);
 	void swapBuffers() { m_Window.display(); }
+	void showCursor(bool show) { m_Window.setMouseCursorVisible(show); }
+	sf::RenderWindow* getWindow() { return &m_Window; }
+	sf::Uint16 getWidth() { return m_Window.getSize().x; }
+	sf::Uint16 getHeight() { return m_Window.getSize().y; }
 
 private:
 	sf::RenderWindow m_Window;
