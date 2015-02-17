@@ -4,6 +4,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/OpenGL.hpp>
+#include "Event.h"
 
 class Window
 {
@@ -14,6 +15,9 @@ public:
 
 	bool init();
 	bool init(sf::Uint16 w, sf::Uint16 h, sf::String title, bool fullscreen = false);
+	void close();
+	bool pollEvent(Event &event);
+	void swapBuffers() { m_Window.display(); }
 
 private:
 	sf::RenderWindow m_Window;

@@ -5,29 +5,44 @@ project(${PROJECT_NAME})
 
 # HEADERS
 
+set(GAME_HEADER_FILES
+	include/game/Asteroids.h
+	include/game/Scene.h
+)
+
 set(SYSTEM_HEADER_FILES
+	include/system/Event.h
+	include/system/SharedScene.h
 	include/system/Window.h
 )
 
 set(HEADER_FILES
+	${GAME_HEADER_FILES}
 	${SYSTEM_HEADER_FILES}
-	include/Asteroids.h
 )
 
 # SOURCE
 
+set(GAME_SOURCE_FILES
+	source/game/Asteroids.cpp
+	source/game/Scene.cpp
+)
+
 set(SYSTEM_SOURCE_FILES
+	source/system/Event.cpp
 	source/system/Window.cpp
 )
 
 set(SOURCE_FILES
+	${GAME_SOURCE_FILES}
 	${SYSTEM_SOURCE_FILES}
 	source/main.cpp
-	source/Asteroids.cpp
 )
 
 add_executable(${PROJECT_NAME} ${SOURCE_FILES} ${HEADER_FILES})
 
+source_group("Header Files\\game" FILES ${GAME_HEADER_FILES})
+source_group("Source Files\\game" FILES ${GAME_SOURCE_FILES})
 source_group("Header Files\\System" FILES ${SYSTEM_HEADER_FILES})
 source_group("Source Files\\System" FILES ${SYSTEM_SOURCE_FILES})
 

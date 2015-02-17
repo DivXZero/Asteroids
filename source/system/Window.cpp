@@ -14,6 +14,10 @@ m_isFullscreen(fullscreen)
 	init();
 }
 
+Window::~Window()
+{
+}
+
 bool Window::init()
 {
 	m_VideoMode = sf::VideoMode(m_Width, m_Height);
@@ -33,6 +37,12 @@ bool Window::init(sf::Uint16 w, sf::Uint16 h, sf::String title, bool fullscreen)
 	return init();
 }
 
-Window::~Window()
+void Window::close()
 {
+	m_Window.close();
+}
+
+bool Window::pollEvent(Event &event)
+{
+	return m_Window.pollEvent(event.getEvent());
 }
