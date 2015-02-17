@@ -13,9 +13,10 @@ void Scene::init()
 	playerShip.init(this);
 }
 
-void Scene::init(Window* window, Event* event)
+void Scene::init(Window* window, Physics* physics, Event* event)
 {
 	setWindow(window);
+	setPhysics(physics);
 	setEvent(event);
 	init();
 }

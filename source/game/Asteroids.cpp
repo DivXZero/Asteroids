@@ -1,8 +1,12 @@
 
 #include "game/Asteroids.h"
+#include <iostream>
 
 Game::Game() :
-m_isRunning(false)
+m_isRunning(false),
+m_time(0.0),
+m_deltaTime(0.01),
+m_accumulator(0.0)
 {
 }
 
@@ -12,10 +16,12 @@ Game::~Game()
 
 bool Game::init()
 {
-	if (!m_Window.init(1024, 768, "Asteroids", false))
+	if (!m_Window.init(1280, 720, "Asteroids", false))
 		return false;
 
-	m_Scene.init(&m_Window, &m_Event);
+	m_Scene.init(&m_Window, &m_Physics, &m_Event);
+
+	m_currentTime = m_Clock.getElapsedTime().asSeconds();
 
 	m_isRunning = true;
 	return true;
@@ -23,8 +29,30 @@ bool Game::init()
 
 void Game::update()
 {
+	double newTime = m_Clock.getElapsedTime().asSeconds();
+	double frameTime = newTime - m_currentTime;
+
+	if (frameTime > 0.25)
+		frameTime = 0.25;
+
+	m_currentTime = newTime;
+	m_accumulator += frameTime;
+
 	processEvents();
-	m_Scene.update();
+
+	while (m_accumulator >= m_deltaTime)
+	{
+		m_Scene.update();
+
+		//m_Physics.world()->Step((float)m_deltaTime, 8, 3);
+		m_Physics.world()->Step(1 / 60.0f, 8, 3);
+
+		m_time += m_deltaTime;
+		m_accumulator -= m_deltaTime;
+	}
+
+	//double alpha = m_accumulator / m_deltaTime;
+
 	m_Scene.render();
 	m_Window.swapBuffers();
 }

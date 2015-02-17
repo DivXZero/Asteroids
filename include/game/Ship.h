@@ -18,6 +18,10 @@ public:
 
 private:
 	Scene* m_Scene;
+	b2BodyDef m_bodyDef;
+	b2Body* m_Body;
+	b2PolygonShape m_Shape;
+	b2FixtureDef m_fixtureDef;
 };
 
 #endif

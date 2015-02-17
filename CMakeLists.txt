@@ -3,43 +3,8 @@ cmake_minimum_required(VERSION 3.1.0)
 set(PROJECT_NAME "Asteroids")
 project(${PROJECT_NAME})
 
-# HEADERS
-
-set(GAME_HEADER_FILES
-	include/game/Asteroids.h
-	include/game/Scene.h
-	include/game/Ship.h
-)
-
-set(SYSTEM_HEADER_FILES
-	include/system/Event.h
-	include/system/SharedScene.h
-	include/system/Window.h
-)
-
-set(HEADER_FILES
-	${GAME_HEADER_FILES}
-	${SYSTEM_HEADER_FILES}
-)
-
-# SOURCE
-
-set(GAME_SOURCE_FILES
-	source/game/Asteroids.cpp
-	source/game/Scene.cpp
-	source/game/Ship.cpp
-)
-
-set(SYSTEM_SOURCE_FILES
-	source/system/Event.cpp
-	source/system/Window.cpp
-)
-
-set(SOURCE_FILES
-	${GAME_SOURCE_FILES}
-	${SYSTEM_SOURCE_FILES}
-	source/main.cpp
-)
+include("include/CMakeLists.txt")
+include("source/CMakeLists.txt")
 
 add_executable(${PROJECT_NAME} ${SOURCE_FILES} ${HEADER_FILES})
 

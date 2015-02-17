@@ -12,7 +12,7 @@ public:
 	~Scene() {}
 
 	void init();
-	void init(Window* window, Event* event);
+	void init(Window* window, Physics* physics, Event* event);
 	void update();
 	void render();
 };
