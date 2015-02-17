@@ -42,10 +42,10 @@ void Game::update()
 
 	while (m_accumulator >= m_deltaTime)
 	{
-		m_Scene.update();
+		m_Physics.world()->Step((float)m_deltaTime, 8, 3);
+		m_Physics.world()->ClearForces();
 
-		//m_Physics.world()->Step((float)m_deltaTime, 8, 3);
-		m_Physics.world()->Step(1 / 60.0f, 8, 3);
+		m_Scene.update();
 
 		m_time += m_deltaTime;
 		m_accumulator -= m_deltaTime;

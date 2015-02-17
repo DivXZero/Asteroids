@@ -10,12 +10,12 @@ public:
 	Physics();
 	~Physics();
 
-	b2World* world() { return &m_World; }
+	b2World* world() { return m_World; }
 
 	static const float Scale;
 
 private:
-	b2World m_World;
+	b2World* m_World;
 	b2Vec2 m_Gravity;
 };
 
