@@ -5,6 +5,8 @@
 #include <SFML/Graphics.hpp>
 #include "game/Scene.h"
 
+#define ACCELERATION 10.0f
+
 class Ship : public sf::ConvexShape
 {
 public:

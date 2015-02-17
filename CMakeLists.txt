@@ -15,6 +15,7 @@ source_group("Source Files\\System" FILES ${SYSTEM_SOURCE_FILES})
 
 set(SFML_INCLUDE_DIR "dependencies/SFML/include")
 set(BOX2D_INCLUDE_DIR "dependencies/Box2D")
+set(GLM_INCLUDE_DIR "dependencies/glm")
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 
@@ -37,4 +38,5 @@ if(BOX2D_FOUND)
 	target_link_libraries(${PROJECT_NAME} ${BOX2D_LIBRARIES})
 endif()
 
+include_directories(${GLM_INCLUDE_DIR})
 include_directories(include)

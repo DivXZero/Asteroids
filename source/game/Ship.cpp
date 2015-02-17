@@ -1,4 +1,5 @@
 
+#include <glm/glm.hpp>
 #include "game/Ship.h"
 
 Ship::Ship()
@@ -31,10 +32,24 @@ void Ship::init(Scene* ownerScene)
 
 void Ship::update()
 {
+	// Forward
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-		m_Body->ApplyForceToCenter(b2Vec2(0, -10), true);
+	{
+		float velocityX = m_Body->GetMass() * ACCELERATION * glm::sin(m_Body->GetAngle());
+		float velocityY = m_Body->GetMass() * ACCELERATION * -glm::cos(m_Body->GetAngle());
+		m_Body->ApplyForceToCenter(b2Vec2(velocityX, velocityY), true);
+	}
+
+	// Rotate CCW (left)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+		m_Body->ApplyTorque(-10, true);
+
+	// Rotate CW (right)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+		m_Body->ApplyTorque(10, true);
 
 	setPosition(m_Body->GetPosition().x * Physics::Scale, m_Body->GetPosition().y * Physics::Scale);
+	setRotation(glm::degrees(m_Body->GetAngle()));
 }
 
 void Ship::render()
