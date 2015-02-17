@@ -3,10 +3,16 @@ cmake_minimum_required(VERSION 3.1.0)
 set(PROJECT_NAME "Asteroids")
 project(${PROJECT_NAME})
 
-set(SOURCE_FILES
-	source/main.cpp)
+set(HEADER_FILES
+	include/Asteroids.h
+	include/system/Window.h)
 
-add_executable(${PROJECT_NAME} ${SOURCE_FILES})
+set(SOURCE_FILES
+	source/main.cpp
+	source/Asteroids.cpp
+	source/system/Window.cpp)
+
+add_executable(${PROJECT_NAME} ${SOURCE_FILES} ${HEADER_FILES})
 
 set(SFML_INCLUDE_DIR "dependencies/SFML/include")
 set(BOX2D_INCLUDE_DIR "dependencies/Box2D")
