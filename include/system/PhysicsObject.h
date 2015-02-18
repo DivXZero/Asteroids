@@ -8,9 +8,6 @@
 class PhysicsObject
 {
 public:
-
-	using BodyType = b2BodyType;
-
 	PhysicsObject();
 	~PhysicsObject();
 
@@ -18,7 +15,7 @@ public:
 	void setBody(b2Body* body) { m_Body = body; }
 	void createBody(b2World* world) { setBody(world->CreateBody(&m_bodyDef)); }
 	void setPosition(float x, float y);
-	void setBodyType(BodyType type);
+	void setBodyType(b2BodyType type);
 	void setLinearDamping(float amt);
 	void setAngularDamping(float amt);
 	void setBoundingBox(float w, float h);
