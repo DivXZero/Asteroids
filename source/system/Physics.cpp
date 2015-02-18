@@ -12,4 +12,5 @@ Physics::Physics()
 
 Physics::~Physics()
 {
+	delete m_World;
 }

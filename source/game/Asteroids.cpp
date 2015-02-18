@@ -16,7 +16,7 @@ Game::~Game()
 
 bool Game::init()
 {
-	if (!m_Window.init(1280, 720, "Asteroids", false))
+	if (!m_Window.init(1920, 1080, "Asteroids", false))
 		return false;
 
 	m_Scene.init(&m_Window, &m_Physics, &m_Event);
@@ -61,7 +61,7 @@ void Game::processEvents()
 {
 	while (m_Window.pollEvent(m_Event))
 	{
-		if (m_Event.getEvent().type == sf::Event::Closed)
+		if (m_Event.getEvent().type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 		{
 			m_Window.close();
 			m_isRunning = false;
