@@ -3,6 +3,7 @@
 #include "game/Ship.h"
 
 Ship playerShip;
+Ship ship2;
 
 void Scene::init()
 {
@@ -11,6 +12,7 @@ void Scene::init()
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
 	playerShip.init(this);
+	ship2.init(this);
 }
 
 void Scene::init(Window* window, Physics* physics, Event* event)
@@ -31,4 +33,5 @@ void Scene::render()
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	playerShip.render();
+	ship2.render();
 }

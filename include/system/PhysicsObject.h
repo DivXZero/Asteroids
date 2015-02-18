@@ -14,11 +14,13 @@ public:
 	b2Body* body() { return m_Body; }
 	void setBody(b2Body* body) { m_Body = body; }
 	void createBody(b2World* world) { setBody(world->CreateBody(&m_bodyDef)); }
+	void createBody(b2World* world, b2BodyType type, float linearDamping, float angularDamping, float density);
 	void setPosition(float x, float y);
 	void setBodyType(b2BodyType type);
 	void setLinearDamping(float amt);
 	void setAngularDamping(float amt);
 	void setBoundingBox(float w, float h);
+	void setPoints(int count, float points[][2]);
 	void setDensity(float density) { m_fixtureDef.density = density; }
 	void createFixture();
 	void applyTorque(float amt) { body()->ApplyTorque(amt, true); }

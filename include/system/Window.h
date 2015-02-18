@@ -22,6 +22,7 @@ public:
 	sf::RenderWindow* getWindow() { return &m_Window; }
 	sf::Uint16 getWidth() { return m_Window.getSize().x; }
 	sf::Uint16 getHeight() { return m_Window.getSize().y; }
+	sf::Vector2f getCenter() { return sf::Vector2f((float)(getWidth() / 2), (float)(getHeight() / 2)); }
 
 private:
 	sf::RenderWindow m_Window;

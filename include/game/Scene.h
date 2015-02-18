@@ -15,6 +15,7 @@ public:
 	void init(Window* window, Physics* physics, Event* event);
 	void update();
 	void render();
+	void draw(sf::Shape& shape) { window()->getWindow()->draw(shape); }
 };
 
 #endif	// ASTEROIDS_SCENE_H
