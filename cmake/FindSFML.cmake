@@ -68,6 +68,7 @@ set(FIND_SFML_PATHS
 	dependencies/SFML/lib/Release
 	dependencies/SFML/build/lib/Debug
 	dependencies/SFML/build/lib/Release
+	dependencies/SFML/lib
     ~/Library/Frameworks
     /Library/Frameworks
     /usr/local
