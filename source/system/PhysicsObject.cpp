@@ -15,9 +15,9 @@ void PhysicsObject::setPosition(float x, float y)
 	m_bodyDef.position.Set((x / Physics::Scale), (y / Physics::Scale));
 }
 
-void PhysicsObject::setBodyType(BodyType type)
+void PhysicsObject::setBodyType(b2BodyType type)
 {
-	m_bodyDef.type = (b2BodyType)type;
+	m_bodyDef.type = type;
 }
 
 void PhysicsObject::setLinearDamping(float amt)
