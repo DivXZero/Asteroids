@@ -25,7 +25,7 @@ void Ship::init(Scene* ownerScene)
 		setPoint(i, sf::Vector2f(points[i][0], points[i][1]));
 
 	setPosition(((float)scene()->window()->getWidth() / 2) - 10, ((float)scene()->window()->getHeight() / 2) - 10);
-	setBodyType(b2BodyType::b2_dynamicBody);
+	setBodyType(b2_dynamicBody);
 	setLinearDamping(0.5f);
 	setAngularDamping(1.0f);
 	createBody(scene()->physics()->world());
