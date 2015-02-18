@@ -4,11 +4,12 @@
 
 #include <SFML/Graphics.hpp>
 #include "game/Scene.h"
+#include "system/PhysicsObject.h"
 
-#define ACCELERATION 50.0f
-#define ROTATION 15.0f
+#define ACCELERATION 20.0f
+#define ROTATION 5.0f
 
-class Ship : public sf::ConvexShape
+class Ship : public sf::ConvexShape, PhysicsObject
 {
 public:
 	Ship();
@@ -17,6 +18,7 @@ public:
 	void init(Scene* ownerScene);
 	void update();
 	void render();
+	void setPosition(float x, float y);
 	Scene* scene() { return m_Scene; }
 
 private:

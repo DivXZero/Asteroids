@@ -10,6 +10,8 @@ set(SYSTEM_HEADER_FILES
 	include/system/Physics.h
 	include/system/SharedScene.h
 	include/system/Window.h
+	include/system/PhysicsObject.h
+	include/system/RenderableObject.h
 )
 
 set(HEADER_FILES

@@ -9,6 +9,8 @@ set(SYSTEM_SOURCE_FILES
 	source/system/Event.cpp
 	source/system/Physics.cpp
 	source/system/Window.cpp
+	source/system/PhysicsObject.cpp
+	source/system/RenderableObject.cpp
 )
 
 set(SOURCE_FILES
