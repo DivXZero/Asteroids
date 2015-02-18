@@ -9,9 +9,7 @@ class PhysicsObject
 {
 public:
 
-	using BodyType = enum { Dynamic = b2BodyType::b2_dynamicBody,
-							Kinematic = b2BodyType::b2_kinematicBody,
-							Static = b2BodyType::b2_staticBody };
+	using BodyType = b2BodyType;
 
 	PhysicsObject();
 	~PhysicsObject();
