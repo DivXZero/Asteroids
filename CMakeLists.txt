@@ -25,9 +25,11 @@ if(OPENGL_FOUND)
 	target_link_libraries(${PROJECT_NAME} ${OPENGL_LIBRARIES})
 endif()
 
+set(SFML_STATIC_LIBRARIES TRUE)
 find_package(SFML 2 REQUIRED system window graphics audio)
 if(SFML_FOUND)
 	include_directories(${SFML_INCLUDE_DIR})
+	target_link_libraries(${PROJECT_NAME} ${SFML_DEPENDENCIES})
 	target_link_libraries(${PROJECT_NAME} ${SFML_LIBRARIES})
 endif()
 

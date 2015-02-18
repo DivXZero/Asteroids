@@ -1,7 +1,6 @@
 
 #include <glm/glm.hpp>
 #include "game/Ship.h"
-#include <iostream>
 
 Ship::Ship()
 {
