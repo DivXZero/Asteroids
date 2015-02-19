@@ -1,9 +1,12 @@
 
 #include "game/Scene.h"
 #include "game/Ship.h"
+#include "game/Rock.h"
+
+#define ROCK_COUNT 100
 
 Ship playerShip;
-Ship ship2;
+Rock rocks[ROCK_COUNT];
 
 void Scene::init()
 {
@@ -12,7 +15,9 @@ void Scene::init()
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
 	playerShip.init(this);
-	ship2.init(this);
+
+	for (int i = 0; i < ROCK_COUNT; i++)
+		rocks[i].init(this);
 }
 
 void Scene::init(Window* window, Physics* physics, Event* event)
@@ -26,6 +31,9 @@ void Scene::init(Window* window, Physics* physics, Event* event)
 void Scene::update()
 {
 	playerShip.update();
+
+	for (int i = 0; i < ROCK_COUNT; i++)
+		rocks[i].update();
 }
 
 void Scene::render()
@@ -33,5 +41,7 @@ void Scene::render()
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	playerShip.render();
-	ship2.render();
+
+	for (int i = 0; i < ROCK_COUNT; i++)
+		rocks[i].render();
 }

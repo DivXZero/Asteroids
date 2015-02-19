@@ -3,6 +3,7 @@ set(GAME_HEADER_FILES
 	include/game/Asteroids.h
 	include/game/Scene.h
 	include/game/Ship.h
+	include/game/Rock.h
 )
 
 set(SYSTEM_HEADER_FILES

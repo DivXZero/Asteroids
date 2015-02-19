@@ -1,24 +1,23 @@
 
 #include <glm/glm.hpp>
-#include "game/Ship.h"
+#include "game/Rock.h"
 
-void Ship::init(Scene* ownerScene)
+void Rock::init(Scene* ownerScene)
 {
 	m_Scene = ownerScene;
-	float points[4][2] = { { -10, 10 }, { 0, -20 }, { 10, 10 }, {0, 0} };
-	setPoints(4, points);
-	setColors(sf::Color(255, 0, 0, 255));
-	setPosition(((float)scene()->window()->getCenter().x) - 10, ((float)scene()->window()->getCenter().y) - 10);
-	createBody(scene()->physics()->world(), b2_dynamicBody, 0.5f, 5.0f, 5.0f);
+	float points[8][2] = { { -40, 0 }, { -35, -20 }, { -20, -25 }, { -20, -40 }, { 0, -45 }, { 10, -30 }, { 20, -25 }, { 20, -10 } };
+	setPoints(8, points);
+	setColors();
+	setPosition(((float)scene()->window()->getCenter().x) - 100, ((float)scene()->window()->getCenter().y) - 100);
+	createBody(scene()->physics()->world(), b2_dynamicBody, 0, 0, 5.0f);
 }
 
-void Ship::update()
+void Rock::update()
 {
-	handleInput();
 	checkOffscreen();
 }
 
-void Ship::render()
+void Rock::render()
 {
 	RenderableObject::setPosition(body()->GetPosition().x * Physics::Scale, body()->GetPosition().y * Physics::Scale);
 	RenderableObject::setRotation(glm::degrees(body()->GetAngle()));
@@ -26,38 +25,19 @@ void Ship::render()
 	scene()->draw(*this);
 }
 
-void Ship::setPosition(float x, float y)
+void Rock::setPosition(float x, float y)
 {
 	RenderableObject::setPosition(x, y);
 	PhysicsObject::setPosition(x, y);
 }
 
-void Ship::setPoints(int count, float points[][2])
+void Rock::setPoints(int count, float points[][2])
 {
 	RenderableObject::setPoints(count, points);
 	PhysicsObject::setPoints(count, points);
 }
 
-void Ship::handleInput()
-{
-	// Forward
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-	{
-		float velocityX = ACCELERATION * glm::sin(body()->GetAngle());
-		float velocityY = ACCELERATION * -glm::cos(body()->GetAngle());
-		body()->ApplyForceToCenter(b2Vec2(velocityX, velocityY), true);
-	}
-
-	// Rotate CCW (left)
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-		applyTorque(-ROTATION);
-
-	// Rotate CW (right)
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-		applyTorque(ROTATION);
-}
-
-void Ship::checkOffscreen()
+void Rock::checkOffscreen()
 {
 	b2Vec2 position(body()->GetPosition().x * Physics::Scale, body()->GetPosition().y * Physics::Scale);
 

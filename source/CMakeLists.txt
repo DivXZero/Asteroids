@@ -3,6 +3,7 @@ set(GAME_SOURCE_FILES
 	source/game/Asteroids.cpp
 	source/game/Scene.cpp
 	source/game/Ship.cpp
+	source/game/Rock.cpp
 )
 
 set(SYSTEM_SOURCE_FILES
