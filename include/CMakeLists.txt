@@ -7,6 +7,8 @@ set(GAME_HEADER_FILES
 )
 
 set(SYSTEM_HEADER_FILES
+	include/system/Game.h
+	include/system/GameObject.h
 	include/system/Event.h
 	include/system/Physics.h
 	include/system/SharedScene.h

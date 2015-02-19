@@ -7,6 +7,8 @@ set(GAME_SOURCE_FILES
 )
 
 set(SYSTEM_SOURCE_FILES
+	source/system/Game.cpp
+	source/system/GameObject.cpp
 	source/system/Event.cpp
 	source/system/Physics.cpp
 	source/system/Window.cpp

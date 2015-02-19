@@ -3,7 +3,7 @@
 #include "game/Ship.h"
 #include "game/Rock.h"
 
-#define ROCK_COUNT 100
+#define ROCK_COUNT 50
 
 Ship playerShip;
 Rock rocks[ROCK_COUNT];

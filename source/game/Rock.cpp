@@ -1,10 +1,9 @@
 
-#include <glm/glm.hpp>
 #include "game/Rock.h"
 
-void Rock::init(Scene* ownerScene)
+void Rock::init(SharedScene* ownerScene)
 {
-	m_Scene = ownerScene;
+	GameObject::init(ownerScene);
 	float points[8][2] = { { -40, 0 }, { -35, -20 }, { -20, -25 }, { -20, -40 }, { 0, -45 }, { 10, -30 }, { 20, -25 }, { 20, -10 } };
 	setPoints(8, points);
 	setColors();
@@ -15,26 +14,6 @@ void Rock::init(Scene* ownerScene)
 void Rock::update()
 {
 	checkOffscreen();
-}
-
-void Rock::render()
-{
-	RenderableObject::setPosition(body()->GetPosition().x * Physics::Scale, body()->GetPosition().y * Physics::Scale);
-	RenderableObject::setRotation(glm::degrees(body()->GetAngle()));
-
-	scene()->draw(*this);
-}
-
-void Rock::setPosition(float x, float y)
-{
-	RenderableObject::setPosition(x, y);
-	PhysicsObject::setPosition(x, y);
-}
-
-void Rock::setPoints(int count, float points[][2])
-{
-	RenderableObject::setPoints(count, points);
-	PhysicsObject::setPoints(count, points);
 }
 
 void Rock::checkOffscreen()

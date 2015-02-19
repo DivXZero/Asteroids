@@ -11,6 +11,7 @@ public:
 	~RenderableObject() {}
 
 	void setPoints(int count, float points[][2]);
+	void setAsBox(float w, float h);
 	void setColors(sf::Color fillColor = sf::Color(0, 0, 0, 255), sf::Color outlineColor = sf::Color(255, 255, 255, 255), float outlineThickness = 1);
 };
 

@@ -1,13 +1,12 @@
 
-#include <glm/glm.hpp>
 #include "game/Ship.h"
 
-void Ship::init(Scene* ownerScene)
+void Ship::init(SharedScene* ownerScene)
 {
-	m_Scene = ownerScene;
+	GameObject::init(ownerScene);
 	float points[4][2] = { { -10, 10 }, { 0, -20 }, { 10, 10 }, {0, 0} };
 	setPoints(4, points);
-	setColors(sf::Color(255, 0, 0, 255));
+	setColors();
 	setPosition(((float)scene()->window()->getCenter().x) - 10, ((float)scene()->window()->getCenter().y) - 10);
 	createBody(scene()->physics()->world(), b2_dynamicBody, 0.5f, 5.0f, 5.0f);
 }
@@ -18,33 +17,13 @@ void Ship::update()
 	checkOffscreen();
 }
 
-void Ship::render()
-{
-	RenderableObject::setPosition(body()->GetPosition().x * Physics::Scale, body()->GetPosition().y * Physics::Scale);
-	RenderableObject::setRotation(glm::degrees(body()->GetAngle()));
-
-	scene()->draw(*this);
-}
-
-void Ship::setPosition(float x, float y)
-{
-	RenderableObject::setPosition(x, y);
-	PhysicsObject::setPosition(x, y);
-}
-
-void Ship::setPoints(int count, float points[][2])
-{
-	RenderableObject::setPoints(count, points);
-	PhysicsObject::setPoints(count, points);
-}
-
 void Ship::handleInput()
 {
 	// Forward
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 	{
-		float velocityX = ACCELERATION * glm::sin(body()->GetAngle());
-		float velocityY = ACCELERATION * -glm::cos(body()->GetAngle());
+		float velocityX = body()->GetMass() * ACCELERATION * glm::sin(body()->GetAngle());
+		float velocityY = body()->GetMass() * ACCELERATION * -glm::cos(body()->GetAngle());
 		body()->ApplyForceToCenter(b2Vec2(velocityX, velocityY), true);
 	}
 
