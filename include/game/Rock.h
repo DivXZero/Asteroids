@@ -12,6 +12,7 @@ public:
 
 	void init(SharedScene* ownerScene);
 	void update();
+	void render();
 
 private:
 	void checkOffscreen();

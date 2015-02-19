@@ -17,6 +17,20 @@ void Ship::update()
 	checkOffscreen();
 }
 
+void Ship::render()
+{
+	GameObject::render();
+
+	float currentX = getPosition().x;
+	float currentY = getPosition().y;
+	float mirrorX = (currentX < scene()->window()->getCenter().x) ? currentX + scene()->window()->getWidth() : currentX - scene()->window()->getWidth();
+	float mirrorY = (currentY < scene()->window()->getCenter().y) ? currentY + scene()->window()->getHeight() : currentY - scene()->window()->getHeight();
+	RenderableObject::setPosition(mirrorX, currentY);
+	scene()->window()->getWindow()->draw(*this);
+	RenderableObject::setPosition(currentX, mirrorY);
+	scene()->window()->getWindow()->draw(*this);
+}
+
 void Ship::handleInput()
 {
 	// Forward
