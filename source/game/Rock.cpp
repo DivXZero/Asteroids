@@ -7,8 +7,8 @@ sf::Vector2f getRandomPosition(int w, int h)
 	int x = glm::linearRand(0, w);
 	int y = glm::linearRand(0, h);
 
-	int gapX = 400;
-	int gapY = 300;
+	int gapX = w / 6;
+	int gapY = h / 4;
 	if (x < ((w / 2) + gapX) && x >((w / 2) - gapX) && (y < (h / 2) + gapY) && (y > (h / 2) - gapY))
 		return getRandomPosition(w, h);
 

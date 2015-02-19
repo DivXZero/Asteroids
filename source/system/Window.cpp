@@ -1,5 +1,4 @@
 
-#include <stdio.h>
 #include "system/Window.h"
 
 Window::Window()
@@ -26,7 +25,14 @@ bool Window::init()
 	m_Window.create(m_VideoMode, m_Title, m_Style, m_ContextSettings);
 	m_Window.setVerticalSyncEnabled(true);
 
+	//resize();
+
 	return m_Window.isOpen();
+}
+
+void Window::resize()
+{
+	glViewport(0, 0, m_Window.getSize().x, m_Window.getSize().y);
 }
 
 bool Window::init(sf::Uint16 w, sf::Uint16 h, sf::String title, bool fullscreen)
@@ -46,5 +52,12 @@ void Window::close()
 
 bool Window::pollEvent(Event &event)
 {
-	return m_Window.pollEvent(event.getEvent());
+	bool e = m_Window.pollEvent(event.getEvent());
+
+	/*
+	if (event.getType() == sf::Event::Resized)
+		resize();
+		*/
+
+	return e;
 }

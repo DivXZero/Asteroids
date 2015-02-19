@@ -2,7 +2,9 @@
 #ifndef ASTEROIDS_SHIP_H
 #define ASTEROIDS_SHIP_H
 
+#include "game/Bullet.h"
 #include "system/GameObject.h"
+#include <vector>
 
 #define ACCELERATION 20.0f
 #define ROTATION 5.0f
@@ -20,6 +22,7 @@ public:
 private:
 	void handleInput();
 	void checkOffscreen();
+	std::vector<Bullet*> m_Bullets;
 };
 
 #endif

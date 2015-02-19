@@ -4,6 +4,7 @@ set(GAME_HEADER_FILES
 	include/game/Scene.h
 	include/game/Ship.h
 	include/game/Rock.h
+	include/game/Bullet.h
 )
 
 set(SYSTEM_HEADER_FILES

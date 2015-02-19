@@ -1,5 +1,6 @@
 
 #include "game/Ship.h"
+#include <iostream>
 
 void Ship::init(SharedScene* ownerScene)
 {
@@ -15,6 +16,12 @@ void Ship::update()
 {
 	handleInput();
 	checkOffscreen();
+
+	std::vector<Bullet*>::iterator bullet;
+	for (bullet = m_Bullets.begin(); bullet < m_Bullets.end(); bullet++)
+	{
+		(*bullet)->update();
+	}
 }
 
 void Ship::render()
@@ -29,6 +36,12 @@ void Ship::render()
 	scene()->window()->getWindow()->draw(*this);
 	RenderableObject::setPosition(currentX, mirrorY);
 	scene()->window()->getWindow()->draw(*this);
+
+	std::vector<Bullet*>::iterator bullet;
+	for (bullet = m_Bullets.begin(); bullet < m_Bullets.end(); bullet++)
+	{
+		(*bullet)->render();
+	}
 }
 
 void Ship::handleInput()
@@ -48,6 +61,12 @@ void Ship::handleInput()
 	// Rotate CW (right)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 		applyTorque(ROTATION);
+
+	// Fire Bullet
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+	{
+		m_Bullets.push_back(new Bullet(scene(), body()->GetPosition(), body()->GetAngle()));
+	}
 }
 
 void Ship::checkOffscreen()

@@ -4,6 +4,7 @@ set(GAME_SOURCE_FILES
 	source/game/Scene.cpp
 	source/game/Ship.cpp
 	source/game/Rock.cpp
+	source/game/bullet.cpp
 )
 
 set(SYSTEM_SOURCE_FILES

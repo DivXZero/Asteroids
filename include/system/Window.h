@@ -25,6 +25,8 @@ public:
 	sf::Vector2f getCenter() { return sf::Vector2f((float)(getWidth() / 2), (float)(getHeight() / 2)); }
 
 private:
+	void resize();
+
 	sf::RenderWindow m_Window;
 	sf::VideoMode m_VideoMode;
 	sf::String m_Title;
