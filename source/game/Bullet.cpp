@@ -2,7 +2,10 @@
 #include <glm/glm.hpp>
 #include "game/Bullet.h"
 
-#define BULLET_SPEED 2000
+Bullet::~Bullet()
+{
+	scene()->physics()->world()->DestroyBody(body());
+}
 
 void Bullet::init(SharedScene* ownerScene, b2Vec2 pos, float angle)
 {
@@ -10,17 +13,20 @@ void Bullet::init(SharedScene* ownerScene, b2Vec2 pos, float angle)
 	setAsBox(2, 2);
 	setColors(sf::Color(255, 255, 255, 255));
 
-	createBody(scene()->physics()->world(), b2_dynamicBody, 0, 0, 100.0f);
+	createBody(scene()->physics()->world(), b2_dynamicBody, 0, 0, 1000.0f);
 	pos.x += glm::sin(angle);
 	pos.y -= glm::cos(angle);
 	body()->SetTransform(pos, angle);
 	float velocityX = glm::sin(angle) * BULLET_SPEED * body()->GetMass();
 	float velocityY = -glm::cos(angle) * BULLET_SPEED * body()->GetMass();
 	body()->ApplyForceToCenter(b2Vec2(velocityX, velocityY), true);
+
+	m_lifeTime = 0;
 }
 
 void Bullet::update()
 {
+	m_lifeTime++;
 	checkOffscreen();
 }
 

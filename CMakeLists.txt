@@ -44,3 +44,5 @@ endif()
 
 include_directories(${GLM_INCLUDE_DIR})
 include_directories(include)
+
+file(COPY ${CMAKE_SOURCE_DIR}/resources DESTINATION /)

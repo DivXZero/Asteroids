@@ -10,6 +10,11 @@ void Ship::init(SharedScene* ownerScene)
 	setColors();
 	setPosition(((float)scene()->window()->getCenter().x) - 10, ((float)scene()->window()->getCenter().y) - 10);
 	createBody(scene()->physics()->world(), b2_dynamicBody, 0.5f, 5.0f, 5.0f);
+
+	m_bulletBuffer.loadFromFile("resources/audio/shoot.wav");
+	m_bulletSound.setBuffer(m_bulletBuffer);
+
+	m_fireDelay = 0;
 }
 
 void Ship::update()
@@ -18,10 +23,22 @@ void Ship::update()
 	checkOffscreen();
 
 	std::vector<Bullet*>::iterator bullet;
-	for (bullet = m_Bullets.begin(); bullet < m_Bullets.end(); bullet++)
+	for (bullet = m_Bullets.begin(); bullet != m_Bullets.end();)
 	{
 		(*bullet)->update();
+
+		if ((*bullet)->getLifeTime() > BULLET_LIFETIME)
+		{
+			delete *bullet;
+			bullet = m_Bullets.erase(bullet);
+		}
+		else {
+			bullet++;
+		}
 	}
+
+	if (m_fireDelay > 0)
+		m_fireDelay--;
 }
 
 void Ship::render()
@@ -65,7 +82,12 @@ void Ship::handleInput()
 	// Fire Bullet
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 	{
-		m_Bullets.push_back(new Bullet(scene(), body()->GetPosition(), body()->GetAngle()));
+		if (m_fireDelay == 0)
+		{
+			m_fireDelay = FIRE_DELAY;
+			m_bulletSound.play();
+			m_Bullets.push_back(new Bullet(scene(), body()->GetPosition(), body()->GetAngle()));
+		}
 	}
 }
 
