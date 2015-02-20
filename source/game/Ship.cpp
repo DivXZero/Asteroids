@@ -1,4 +1,5 @@
 
+#include "game/GameScene.h"
 #include "game/Ship.h"
 
 void Ship::init(SharedScene* ownerScene)
@@ -18,6 +19,7 @@ void Ship::init(SharedScene* ownerScene)
 
 void Ship::update()
 {
+	/*
 	std::vector<Bullet*>::iterator bullet;
 	for (bullet = m_Bullets.begin(); bullet != m_Bullets.end();)
 	{
@@ -32,6 +34,7 @@ void Ship::update()
 			bullet++;
 		}
 	}
+	*/
 
 	handleInput();
 	checkOffscreen();
@@ -53,11 +56,13 @@ void Ship::render()
 	RenderableObject::setPosition(currentX, mirrorY);
 	scene()->window()->getWindow()->draw(*this);
 
+	/*
 	std::vector<Bullet*>::iterator bullet;
 	for (bullet = m_Bullets.begin(); bullet < m_Bullets.end(); bullet++)
 	{
 		(*bullet)->render();
 	}
+	*/
 }
 
 void Ship::handleInput()
@@ -85,7 +90,8 @@ void Ship::handleInput()
 		{
 			m_fireDelay = FIRE_DELAY;
 			m_bulletSound.play();
-			m_Bullets.push_back(new Bullet(scene(), body()->GetPosition(), body()->GetAngle()));
+			//m_Bullets.push_back(new Bullet(scene(), body()->GetPosition(), body()->GetAngle()));
+			//scene()->addObject(new Bullet(scene(), body()->GetPosition(), body()->GetAngle()));
 		}
 	}
 }

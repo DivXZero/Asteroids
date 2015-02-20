@@ -1,16 +1,15 @@
 
 #include "game/Asteroids.h"
 
+typedef Singleton<Asteroids> AsteroidsGame;
+
 int main(int argc, char** argv)
 {
-	Game game;
+	AsteroidsGame::Instance()->init();
 
-	if (!game.init())
-		return -1;
-
-	while (game.isRunning())
+	while (AsteroidsGame::Instance()->isRunning())
 	{
-		game.update();
+		AsteroidsGame::Instance()->update();
 	}
 
 	return 0;

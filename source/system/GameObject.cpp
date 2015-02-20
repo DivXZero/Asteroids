@@ -1,15 +1,6 @@
 
 #include "system/GameObject.h"
 
-void GameObject::init(SharedScene* ownerScene)
-{
-	m_Scene = ownerScene;
-}
-
-void GameObject::update()
-{
-}
-
 void GameObject::render()
 {
 	RenderableObject::setPosition(body()->GetPosition().x * Physics::Scale, body()->GetPosition().y * Physics::Scale);
