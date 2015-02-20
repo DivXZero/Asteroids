@@ -29,7 +29,9 @@ public:
 	void startContact(PhysicsObject* object);
 	void endContact();
 	bool isContacting() { return m_isContacting; }
-	const char* getTypeName() { return typeid(*this).name(); }
+	template <class T> bool isType() { if (getType<T>()) { return true; } else { return false; } }
+	template <class T> T* getType() { T* tmp = dynamic_cast<T*>(this); if (tmp) { return tmp; } else { return nullptr; } }
+	//const char* getTypeName() { return typeid(*this).name(); }
 	template <class T> bool isContacting();
 	virtual void update() = 0;
 
@@ -46,12 +48,8 @@ template <class T>
 bool PhysicsObject::isContacting()
 {
 	if (isContacting())
-	{
-		if (typeid(T).name() == m_collideObject->getTypeName())
+		if (m_collideObject->isType<T>())
 			return true;
-		
-		return false;	
-	}
 	
 	return false;
 }

@@ -39,7 +39,7 @@ void Rock::init(SharedScene* ownerScene)
 
 void Rock::update()
 {
-	if (isContacting<Bullet>() || isContacting<Ship>())
+	if (isContacting<Bullet>())
 	{
 		m_colorFade = 255;
 	}
