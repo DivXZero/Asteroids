@@ -34,6 +34,8 @@ void Scene::update()
 
 	for (int i = 0; i < ROCK_COUNT; i++)
 		rocks[i].update();
+
+	updateObjects();
 }
 
 void Scene::render()
@@ -44,4 +46,6 @@ void Scene::render()
 
 	for (int i = 0; i < ROCK_COUNT; i++)
 		rocks[i].render();
+
+	renderObjects();
 }

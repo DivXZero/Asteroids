@@ -1,6 +1,5 @@
 
 #include "game/Ship.h"
-#include <iostream>
 
 void Ship::init(SharedScene* ownerScene)
 {
@@ -22,8 +21,7 @@ void Ship::update()
 	std::vector<Bullet*>::iterator bullet;
 	for (bullet = m_Bullets.begin(); bullet != m_Bullets.end();)
 	{
-		if ((*bullet)->isAlive())
-			(*bullet)->update();
+		(*bullet)->update();
 
 		if (!(*bullet)->isAlive())
 		{
@@ -87,8 +85,7 @@ void Ship::handleInput()
 		{
 			m_fireDelay = FIRE_DELAY;
 			m_bulletSound.play();
-			Bullet* bullet = new Bullet(scene(), body()->GetPosition(), body()->GetAngle());
-			m_Bullets.push_back(bullet);
+			m_Bullets.push_back(new Bullet(scene(), body()->GetPosition(), body()->GetAngle()));
 		}
 	}
 }

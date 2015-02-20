@@ -1,7 +1,6 @@
 
 #include "game/Bullet.h"
 #include "game/Rock.h"
-#include <iostream>
 
 Bullet::~Bullet()
 {
@@ -50,4 +49,9 @@ void Bullet::checkOffscreen()
 
 	if (position.y < 0)
 		body()->SetTransform(b2Vec2(position.x / Physics::Scale, scene()->window()->getHeight() / Physics::Scale), body()->GetAngle());
+}
+
+void Bullet::kill()
+{
+	m_isAlive = false;
 }

@@ -1,6 +1,5 @@
 
 #include "game/Asteroids.h"
-#include <iostream>
 
 Game::Game() :
 m_isRunning(false),

@@ -6,7 +6,7 @@
 #include "system/GameObject.h"
 
 #define BULLET_SPEED 2000
-#define BULLET_LIFETIME 1000
+#define BULLET_LIFETIME 400
 
 class Bullet : public GameObject
 {
@@ -19,6 +19,7 @@ public:
 	void update();
 	int getLifeTime() { return m_lifeTime; }
 	bool isAlive() { return m_isAlive; }
+	void kill();
 
 private:
 	void checkOffscreen();

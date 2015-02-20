@@ -28,11 +28,12 @@ public:
 	void applyTorque(float amt) { body()->ApplyTorque(amt, true); }
 	void startContact(PhysicsObject* object);
 	void endContact();
-	bool isContacting() { return m_isContacting; }
-	template <class T> bool isType() { if (getType<T>()) { return true; } else { return false; } }
-	template <class T> T* getType() { T* tmp = dynamic_cast<T*>(this); if (tmp) { return tmp; } else { return nullptr; } }
-	//const char* getTypeName() { return typeid(*this).name(); }
-	template <class T> bool isContacting();
+	bool isColliding() { return m_isContacting; }
+	template <class T> bool isType();
+	template <class T> T* getType();
+	template <class T> bool isColliding();
+	template <class T> T* getCollider();
+	// const char* getTypeName() { return typeid(*this).name(); }
 	virtual void update() = 0;
 
 private:
@@ -45,9 +46,30 @@ private:
 };
 
 template <class T>
-bool PhysicsObject::isContacting()
+bool PhysicsObject::isType()
 {
-	if (isContacting())
+	if (nullptr != getType<T>())
+		return true;
+	
+	return false; 
+}
+
+template <class T>
+T* PhysicsObject::getType()
+{
+	return dynamic_cast<T*>(this);
+}
+
+template <class T>
+T* PhysicsObject::getCollider()
+{
+	return m_collideObject->getType<T>();
+}
+
+template <class T>
+bool PhysicsObject::isColliding()
+{
+	if (isColliding())
 		if (m_collideObject->isType<T>())
 			return true;
 	

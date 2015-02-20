@@ -20,9 +20,18 @@ sf::Vector2f getRandomPosition(int w, int h)
 void Rock::init(SharedScene* ownerScene)
 {
 	GameObject::init(ownerScene);
-	float points[8][2] = { { -40, 0 }, { -35, -20 }, { -20, -25 }, { -20, -40 }, { 0, -45 }, { 10, -30 }, { 20, -25 }, { 20, -10 } };
-	setPoints(8, points);
-	//setAsBox(10, 10);
+	//float points[8][2] = { { -40, 0 }, { -35, -20 }, { -20, -25 }, { -20, -40 }, { 0, -45 }, { 10, -30 }, { 20, -25 }, { 20, -10 } };
+	float points[8][2];
+	points[0][0] = (float)glm::linearRand(-40, -20); points[0][1] = 0;
+	points[1][0] = (float)glm::linearRand(-20, 0); points[1][1] = (float)glm::linearRand(-30, -10);
+	points[2][0] = 0; points[2][1] = (float)glm::linearRand(-40, -20);
+	points[3][0] = (float)glm::linearRand(20, 40); points[3][1] = (float)glm::linearRand(-30, -10);
+	points[4][0] = (float)glm::linearRand(20, 40); points[4][1] = 0;
+	points[5][0] = (float)glm::linearRand(0, 20); points[5][1] = (float)glm::linearRand(0, 20);
+	points[6][0] = 0; points[6][1] = (float)glm::linearRand(20, 40);
+	points[7][0] = (float)glm::linearRand(-40, -20); points[7][1] = (float)glm::linearRand(10, 30);
+	//setPoints(8, points);
+	setAsBox(60, 60);
 	setColors();
 	
 	sf::Vector2f pos = getRandomPosition((int)scene()->window()->getWidth(), (int)scene()->window()->getHeight());
@@ -35,13 +44,19 @@ void Rock::init(SharedScene* ownerScene)
 	float velocityX = (float)glm::linearRand(-5000, 5000);
 	float velocityY = (float)glm::linearRand(-5000, 5000);
 	body()->ApplyForceToCenter(b2Vec2(velocityX, velocityY), true);
+
+	m_explodeBuffer.loadFromFile("resources/audio/explode1.wav");
+	m_explodeSound.setBuffer(m_explodeBuffer);
+	m_explodeSound.setVolume(10.0f);
 }
 
 void Rock::update()
 {
-	if (isContacting<Bullet>())
+	if (isColliding<Bullet>())
 	{
-		m_colorFade = 255;
+		m_explodeSound.play();
+		getCollider<Bullet>()->kill();
+		m_colorFade = 100;
 	}
 	else
 	{
@@ -49,7 +64,7 @@ void Rock::update()
 			m_colorFade -= 5;
 	}
 	
-	setColors(sf::Color(m_colorFade, 0, 0, 255));
+	setColors(sf::Color(m_colorFade, m_colorFade, m_colorFade, 255));
 
 	checkOffscreen();
 }
