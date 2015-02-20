@@ -16,6 +16,7 @@ public:
 
 private:
 	void checkOffscreen();
+	int m_colorFade;
 };
 
 #endif

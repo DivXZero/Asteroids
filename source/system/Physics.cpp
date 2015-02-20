@@ -8,6 +8,7 @@ Physics::Physics()
 {
 	m_Gravity = b2Vec2(0, 0);
 	m_World = new b2World(m_Gravity);
+	world()->SetContactListener(&m_CollisionListener);
 }
 
 Physics::~Physics()

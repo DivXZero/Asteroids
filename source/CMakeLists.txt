@@ -15,6 +15,7 @@ set(SYSTEM_SOURCE_FILES
 	source/system/Window.cpp
 	source/system/PhysicsObject.cpp
 	source/system/RenderableObject.cpp
+	source/system/PhysicsCollision.cpp
 )
 
 set(SOURCE_FILES

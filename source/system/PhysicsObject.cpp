@@ -2,6 +2,12 @@
 #include "system/Physics.h"
 #include "system/PhysicsObject.h"
 
+void PhysicsObject::setBody(b2Body* body)
+{
+	m_Body = body;
+	body->SetUserData(this);
+}
+
 void PhysicsObject::setPosition(float x, float y)
 {
 	m_bodyDef.position.Set((x / Physics::Scale), (y / Physics::Scale));
@@ -56,6 +62,7 @@ void PhysicsObject::setPoints(int count, float points[][2])
 void PhysicsObject::createBody(b2World* world)
 {
 	setBody(world->CreateBody(&m_bodyDef));
+	//world->SetContactListener
 }
 
 void PhysicsObject::createBody(b2World* world, b2BodyType type, float linearDamping, float angularDamping, float density)

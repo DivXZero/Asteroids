@@ -37,6 +37,17 @@ void Rock::init(SharedScene* ownerScene)
 
 void Rock::update()
 {
+	if (isContacting())
+	{
+		m_colorFade = 255;
+	}
+	else {
+		if (m_colorFade > 0)
+			m_colorFade -= 5;
+	}
+	
+	setColors(sf::Color(m_colorFade, 0, 0, 255));
+
 	checkOffscreen();
 }
 

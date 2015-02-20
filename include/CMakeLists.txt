@@ -16,6 +16,7 @@ set(SYSTEM_HEADER_FILES
 	include/system/Window.h
 	include/system/PhysicsObject.h
 	include/system/RenderableObject.h
+	include/system/PhysicsCollision.h
 )
 
 set(HEADER_FILES

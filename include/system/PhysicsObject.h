@@ -12,7 +12,7 @@ public:
 	~PhysicsObject() {}
 
 	b2Body* body() { return m_Body; }
-	void setBody(b2Body* body) { m_Body = body; }
+	void setBody(b2Body* body);
 	void createBody(b2World* world);
 	void createBody(b2World* world, b2BodyType type, float linearDamping, float angularDamping, float density);
 	void setPosition(float x, float y);
@@ -25,12 +25,16 @@ public:
 	void setDensity(float density) { m_fixtureDef.density = density; }
 	void createFixture();
 	void applyTorque(float amt) { body()->ApplyTorque(amt, true); }
+	void startContact() { m_isContacting = true; }
+	void endContact() { m_isContacting = false; }
+	bool isContacting() { return m_isContacting; }
 
 private:
 	b2BodyDef m_bodyDef;
 	b2Body* m_Body;
 	b2FixtureDef m_fixtureDef;
 	b2PolygonShape m_Shape;
+	bool m_isContacting;
 };
 
 #endif	// PYSICSOBJECT_H
