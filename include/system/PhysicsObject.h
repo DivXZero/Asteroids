@@ -4,6 +4,7 @@
 
 #include <Box2D/Box2D.h>
 #include <glm/glm.hpp>
+#include <iostream>
 
 class PhysicsObject
 {
@@ -25,9 +26,12 @@ public:
 	void setDensity(float density) { m_fixtureDef.density = density; }
 	void createFixture();
 	void applyTorque(float amt) { body()->ApplyTorque(amt, true); }
-	void startContact() { m_isContacting = true; }
-	void endContact() { m_isContacting = false; }
+	void startContact(PhysicsObject* object);
+	void endContact();
 	bool isContacting() { return m_isContacting; }
+	const char* getTypeName() { return typeid(*this).name(); }
+	template <class T> bool isContacting();
+	virtual void update() = 0;
 
 private:
 	b2BodyDef m_bodyDef;
@@ -35,6 +39,21 @@ private:
 	b2FixtureDef m_fixtureDef;
 	b2PolygonShape m_Shape;
 	bool m_isContacting;
+	PhysicsObject* m_collideObject;
 };
+
+template <class T>
+bool PhysicsObject::isContacting()
+{
+	if (isContacting())
+	{
+		if (typeid(T).name() == m_collideObject->getTypeName())
+			return true;
+		
+		return false;	
+	}
+	
+	return false;
+}
 
 #endif	// PYSICSOBJECT_H

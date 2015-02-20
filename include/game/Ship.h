@@ -3,6 +3,7 @@
 #define ASTEROIDS_SHIP_H
 
 #include <SFML/Audio.hpp>
+#include "game/Rock.h"
 #include "game/Bullet.h"
 #include "system/GameObject.h"
 #include <vector>

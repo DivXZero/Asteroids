@@ -1,6 +1,8 @@
 
 #include <glm/gtc/random.hpp>
+#include "game/Ship.h"
 #include "game/Rock.h"
+#include "game/Bullet.h"
 
 sf::Vector2f getRandomPosition(int w, int h)
 {
@@ -37,11 +39,12 @@ void Rock::init(SharedScene* ownerScene)
 
 void Rock::update()
 {
-	if (isContacting())
+	if (isContacting<Bullet>() || isContacting<Ship>())
 	{
 		m_colorFade = 255;
 	}
-	else {
+	else
+	{
 		if (m_colorFade > 0)
 			m_colorFade -= 5;
 	}

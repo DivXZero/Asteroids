@@ -62,7 +62,6 @@ void PhysicsObject::setPoints(int count, float points[][2])
 void PhysicsObject::createBody(b2World* world)
 {
 	setBody(world->CreateBody(&m_bodyDef));
-	//world->SetContactListener
 }
 
 void PhysicsObject::createBody(b2World* world, b2BodyType type, float linearDamping, float angularDamping, float density)
@@ -73,4 +72,16 @@ void PhysicsObject::createBody(b2World* world, b2BodyType type, float linearDamp
 	createBody(world);
 	setDensity(density);
 	createFixture();
+}
+
+void PhysicsObject::startContact(PhysicsObject* object)
+{
+	m_isContacting = true;
+	m_collideObject = object;
+}
+
+void PhysicsObject::endContact()
+{
+	m_collideObject = nullptr;
+	m_isContacting = false;
 }

@@ -1,6 +1,7 @@
 
-#include <glm/glm.hpp>
 #include "game/Bullet.h"
+#include "game/Rock.h"
+#include <iostream>
 
 Bullet::~Bullet()
 {
@@ -22,12 +23,16 @@ void Bullet::init(SharedScene* ownerScene, b2Vec2 pos, float angle)
 	body()->ApplyForceToCenter(b2Vec2(velocityX, velocityY), true);
 
 	m_lifeTime = 0;
+	m_isAlive = true;
 }
 
 void Bullet::update()
 {
 	m_lifeTime++;
 	checkOffscreen();
+
+	if (getLifeTime() > BULLET_LIFETIME)
+		m_isAlive = false;
 }
 
 void Bullet::checkOffscreen()

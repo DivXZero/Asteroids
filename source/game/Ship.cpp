@@ -19,15 +19,13 @@ void Ship::init(SharedScene* ownerScene)
 
 void Ship::update()
 {
-	handleInput();
-	checkOffscreen();
-
 	std::vector<Bullet*>::iterator bullet;
 	for (bullet = m_Bullets.begin(); bullet != m_Bullets.end();)
 	{
-		(*bullet)->update();
+		if ((*bullet)->isAlive())
+			(*bullet)->update();
 
-		if ((*bullet)->getLifeTime() > BULLET_LIFETIME)
+		if (!(*bullet)->isAlive())
 		{
 			delete *bullet;
 			bullet = m_Bullets.erase(bullet);
@@ -36,6 +34,9 @@ void Ship::update()
 			bullet++;
 		}
 	}
+
+	handleInput();
+	checkOffscreen();
 
 	if (m_fireDelay > 0)
 		m_fireDelay--;
@@ -86,7 +87,8 @@ void Ship::handleInput()
 		{
 			m_fireDelay = FIRE_DELAY;
 			m_bulletSound.play();
-			m_Bullets.push_back(new Bullet(scene(), body()->GetPosition(), body()->GetAngle()));
+			Bullet* bullet = new Bullet(scene(), body()->GetPosition(), body()->GetAngle());
+			m_Bullets.push_back(bullet);
 		}
 	}
 }
