@@ -19,7 +19,7 @@ public:
 	void render();
 	int getLifeTime() { return m_lifeTime; }
 	bool isAlive() { return m_isAlive; }
-	void kill();
+	void destroy();
 
 private:
 	void checkOffscreen();

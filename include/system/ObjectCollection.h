@@ -32,12 +32,14 @@ void ObjectCollection<T>::addObject(Object<T>* object)
 template <class T>
 void ObjectCollection::destroyObject(Object<T>* object)
 {
-	for (m_ObjectIter = m_Objects.begin(); m_ObjectIter != m_Objects.end();)
-	if (object == (*m_ObjectIter))
-	{
-		delete *m_ObjectIter;
-		m_Objects.erase(m_ObjectIter);
-	}
+
+
+	(*objIter)->destroy();
+	delete *objIter;
+	m_Object.erase(m_ObjIter);
+
+
+}
 }
 */
 

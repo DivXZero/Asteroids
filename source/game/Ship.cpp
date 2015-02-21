@@ -44,10 +44,6 @@ void Ship::update()
 
 void Ship::render()
 {
-	RenderableObject::setPosition(body()->GetPosition().x * Physics::Scale, body()->GetPosition().y * Physics::Scale);
-	RenderableObject::setRotation(glm::degrees(body()->GetAngle()));
-	renderObject();
-
 	float currentX = getPosition().x;
 	float currentY = getPosition().y;
 	float mirrorX = (currentX < scene()->window()->getCenter().x) ? currentX + scene()->window()->getWidth() : currentX - scene()->window()->getWidth();

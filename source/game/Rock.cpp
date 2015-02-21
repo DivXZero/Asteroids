@@ -53,12 +53,11 @@ void Rock::init()
 
 void Rock::update()
 {
-	//if (isColliding<Bullet>())
-	if (isColliding())
+	if (isColliding<Ship>())
 	{
 		//m_explodeSound.play();
-		//getCollider<Bullet>()->kill();
-		m_colorFade = 100;
+		//getCollider<Bullet>()->destroy();
+		m_colorFade = 200;
 	}
 	else
 	{
@@ -73,10 +72,6 @@ void Rock::update()
 
 void Rock::render()
 {
-	RenderableObject::setPosition(body()->GetPosition().x * Physics::Scale, body()->GetPosition().y * Physics::Scale);
-	RenderableObject::setRotation(glm::degrees(body()->GetAngle()));
-	renderObject();
-	
 	float currentX = getPosition().x;
 	float currentY = getPosition().y;
 	float mirrorX = (currentX < scene()->window()->getCenter().x) ? currentX + scene()->window()->getWidth() : currentX - scene()->window()->getWidth();

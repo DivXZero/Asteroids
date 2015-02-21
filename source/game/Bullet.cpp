@@ -60,7 +60,7 @@ void Bullet::checkOffscreen()
 		body()->SetTransform(b2Vec2(position.x / Physics::Scale, scene()->window()->getHeight() / Physics::Scale), body()->GetAngle());
 }
 
-void Bullet::kill()
+void Bullet::destroy()
 {
 	m_isAlive = false;
 }

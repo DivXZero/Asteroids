@@ -1,10 +1,21 @@
 
 #include "system/GameObject.h"
 
+void GameObject::updateObject()
+{
+	RenderableObject::setPosition(body()->GetPosition().x * Physics::Scale, body()->GetPosition().y * Physics::Scale);
+	RenderableObject::setRotation(glm::degrees(body()->GetAngle()));
+}
+
 void GameObject::renderObject()
 {
-	// Move this to renderableobject update
+	// Move this to renderableobject?
 	scene()->window()->getWindow()->draw(*this);
+}
+
+void GameObject::destroyObject()
+{
+	// dunno?
 }
 
 void GameObject::setPosition(float x, float y)

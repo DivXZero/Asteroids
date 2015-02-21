@@ -12,8 +12,9 @@ public:
 	~Object() {}
 
 	void init() { get()->init(); }
-	void update() { get()->update(); }
-	void render() { get()->render(); }
+	void update() { get()->updateObject(); get()->update(); }
+	void render() { get()->renderObject(); get()->render(); }
+	void destroy() { get()->destroyObject(); get()->destroy(); }
 
 	T* get() { return m_Object; }
 

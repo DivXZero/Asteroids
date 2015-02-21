@@ -14,8 +14,10 @@ public:
 
 	virtual void update() = 0;
 	virtual void render() = 0;
+	void destroy() {}
 	void updateObject();
 	void renderObject();
+	void destroyObject();
 	void setPosition(float x, float y);
 	void setAsBox(float w, float h);
 	void setPoints(int count, float points[][2]);
