@@ -44,7 +44,7 @@ void ObjectCollection::destroyObject(Object<T>* object)
 template <class T>
 void ObjectCollection<T>::update()
 {
-	std::vector<Object<T>*>::iterator objIter;
+	typename std::vector<Object<T>*>::iterator objIter;
 	for (objIter = m_Objects.begin(); objIter != m_Objects.end(); objIter++)
 		(*objIter)->update();
 }
@@ -52,7 +52,7 @@ void ObjectCollection<T>::update()
 template <class T>
 void ObjectCollection<T>::render()
 {
-	std::vector<Object<T>*>::iterator objIter;
+	typename std::vector<Object<T>*>::iterator objIter;
 	for (objIter = m_Objects.begin(); objIter != m_Objects.end(); objIter++)
 		(*objIter)->render();
 }

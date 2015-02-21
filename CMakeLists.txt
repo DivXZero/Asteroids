@@ -8,7 +8,9 @@ include("source/CMakeLists.txt")
 
 add_executable(${PROJECT_NAME} ${SOURCE_FILES} ${HEADER_FILES})
 
-list( APPEND CMAKE_CXX_FLAGS "-std=c++0x ${CMAKE_CXX_FLAGS} -g")
+if(UNIX)
+	list( APPEND CMAKE_CXX_FLAGS "-std=c++0x ${CMAKE_CXX_FLAGS}")
+endif()
 
 source_group("Header Files\\game" FILES ${GAME_HEADER_FILES})
 source_group("Source Files\\game" FILES ${GAME_SOURCE_FILES})
