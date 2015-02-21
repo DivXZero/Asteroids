@@ -14,11 +14,12 @@ set(SYSTEM_HEADER_FILES
 	include/system/Event.h
 	include/system/Physics.h
 	include/system/Scene.h
-	include/system/SharedScene.h
 	include/system/Window.h
 	include/system/PhysicsObject.h
 	include/system/RenderableObject.h
 	include/system/PhysicsCollision.h
+	include/system/Object.h
+	include/system/ObjectCollection.h
 	include/system/Singleton.h
 )
 

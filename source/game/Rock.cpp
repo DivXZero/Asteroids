@@ -17,9 +17,8 @@ sf::Vector2f getRandomPosition(int w, int h)
 	return sf::Vector2f((float)x, (float)y);
 }
 
-void Rock::init(SharedScene* ownerScene)
+void Rock::init()
 {
-	GameObject::init(ownerScene);
 	//float points[8][2] = { { -40, 0 }, { -35, -20 }, { -20, -25 }, { -20, -40 }, { 0, -45 }, { 10, -30 }, { 20, -25 }, { 20, -10 } };
 	float points[8][2];
 	points[0][0] = (float)glm::linearRand(-40, -20); points[0][1] = 0;
@@ -31,7 +30,7 @@ void Rock::init(SharedScene* ownerScene)
 	points[6][0] = 0; points[6][1] = (float)glm::linearRand(20, 40);
 	points[7][0] = (float)glm::linearRand(-40, -20); points[7][1] = (float)glm::linearRand(10, 30);
 	//setPoints(8, points);
-	setAsBox(60, 60);
+	setAsBox(20, 20);
 	setColors();
 	
 	sf::Vector2f pos = getRandomPosition((int)scene()->window()->getWidth(), (int)scene()->window()->getHeight());
@@ -45,17 +44,20 @@ void Rock::init(SharedScene* ownerScene)
 	float velocityY = (float)glm::linearRand(-5000, 5000);
 	body()->ApplyForceToCenter(b2Vec2(velocityX, velocityY), true);
 
-	m_explodeBuffer.loadFromFile("resources/audio/explode1.wav");
-	m_explodeSound.setBuffer(m_explodeBuffer);
-	m_explodeSound.setVolume(10.0f);
+	//m_explodeBuffer.loadFromFile("resources/audio/explode1.wav");
+	//m_explodeSound.setBuffer(m_explodeBuffer);
+	//m_explodeSound.setVolume(10.0f);
+
+	m_colorFade = 0;
 }
 
 void Rock::update()
 {
-	if (isColliding<Bullet>())
+	//if (isColliding<Bullet>())
+	if (isColliding())
 	{
-		m_explodeSound.play();
-		getCollider<Bullet>()->kill();
+		//m_explodeSound.play();
+		//getCollider<Bullet>()->kill();
 		m_colorFade = 100;
 	}
 	else
@@ -71,16 +73,19 @@ void Rock::update()
 
 void Rock::render()
 {
-	GameObject::render();
-
+	RenderableObject::setPosition(body()->GetPosition().x * Physics::Scale, body()->GetPosition().y * Physics::Scale);
+	RenderableObject::setRotation(glm::degrees(body()->GetAngle()));
+	renderObject();
+	
 	float currentX = getPosition().x;
 	float currentY = getPosition().y;
 	float mirrorX = (currentX < scene()->window()->getCenter().x) ? currentX + scene()->window()->getWidth() : currentX - scene()->window()->getWidth();
 	float mirrorY = (currentY < scene()->window()->getCenter().y) ? currentY + scene()->window()->getHeight() : currentY - scene()->window()->getHeight();
+
 	RenderableObject::setPosition(mirrorX, currentY);
-	scene()->window()->getWindow()->draw(*this);
+	renderObject();
 	RenderableObject::setPosition(currentX, mirrorY);
-	scene()->window()->getWindow()->draw(*this);
+	renderObject();
 }
 
 void Rock::checkOffscreen()

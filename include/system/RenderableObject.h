@@ -3,8 +3,9 @@
 #define RENDERABLEOBJECT_H
 
 #include <SFML/Graphics.hpp>
+#include "system/SharedObject.h"
 
-class RenderableObject : public sf::ConvexShape
+class RenderableObject : public sf::ConvexShape, public SharedObject
 {
 public:
 	RenderableObject() {}

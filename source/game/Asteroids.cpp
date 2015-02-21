@@ -1,9 +1,8 @@
 
 #include "game/Asteroids.h"
-
-GameScene mainScene;
+#include "game/GameScene.h"
 
 bool Asteroids::init()
 {
-	return Game::init(&mainScene);
+	return Game::init(&m_mainScene);
 }

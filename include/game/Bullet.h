@@ -2,7 +2,6 @@
 #ifndef ASTEROIDS_BULLET_H
 #define ASTEROIDS_BULLET_H
 
-#include <glm/glm.hpp>
 #include "system/GameObject.h"
 
 #define BULLET_SPEED 2000
@@ -12,11 +11,12 @@ class Bullet : public GameObject
 {
 public:
 	Bullet() : m_isAlive(false) {}
-	Bullet(SharedScene* ownerScene, b2Vec2 pos, float angle) { init(ownerScene, pos, angle); }
 	~Bullet();
 
-	void init(SharedScene* ownerScene, b2Vec2 pos, float angle);
+	void init();
+	void set(b2Vec2 pos, float angle);
 	void update();
+	void render();
 	int getLifeTime() { return m_lifeTime; }
 	bool isAlive() { return m_isAlive; }
 	void kill();

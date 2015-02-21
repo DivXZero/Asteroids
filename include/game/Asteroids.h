@@ -3,7 +3,7 @@
 #define ASTEROIDS_GAME_H
 
 #include "system/Game.h"
-#include "GameScene.h"
+#include "game/GameScene.h"
 
 class Asteroids : public Game
 {
@@ -12,6 +12,9 @@ public:
 	~Asteroids() {}
 
 	bool init();
+
+private:
+	GameScene m_mainScene;
 };
 
 #endif	// ASTEROIDS_GAME_H

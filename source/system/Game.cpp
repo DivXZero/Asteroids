@@ -33,7 +33,7 @@ void Game::update()
 		m_Physics.world()->Step((float)m_deltaTime, 8, 3);
 		m_Physics.world()->ClearForces();
 
-		scene()->update();
+		scene()->updateScene();
 
 		m_time += m_deltaTime;
 		m_accumulator -= m_deltaTime;
@@ -41,7 +41,7 @@ void Game::update()
 
 	//double alpha = m_accumulator / m_deltaTime;
 
-	scene()->render();
+	scene()->renderScene();
 	m_Window.swapBuffers();
 }
 

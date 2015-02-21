@@ -2,9 +2,8 @@
 #include "game/GameScene.h"
 #include "game/Ship.h"
 
-void Ship::init(SharedScene* ownerScene)
+void Ship::init()
 {
-	GameObject::init(ownerScene);
 	float points[4][2] = { { -10, 10 }, { 0, -20 }, { 10, 10 }, {0, 0} };
 	setPoints(4, points);
 	setColors();
@@ -45,16 +44,19 @@ void Ship::update()
 
 void Ship::render()
 {
-	GameObject::render();
+	RenderableObject::setPosition(body()->GetPosition().x * Physics::Scale, body()->GetPosition().y * Physics::Scale);
+	RenderableObject::setRotation(glm::degrees(body()->GetAngle()));
+	renderObject();
 
 	float currentX = getPosition().x;
 	float currentY = getPosition().y;
 	float mirrorX = (currentX < scene()->window()->getCenter().x) ? currentX + scene()->window()->getWidth() : currentX - scene()->window()->getWidth();
 	float mirrorY = (currentY < scene()->window()->getCenter().y) ? currentY + scene()->window()->getHeight() : currentY - scene()->window()->getHeight();
+
 	RenderableObject::setPosition(mirrorX, currentY);
-	scene()->window()->getWindow()->draw(*this);
+	renderObject();
 	RenderableObject::setPosition(currentX, mirrorY);
-	scene()->window()->getWindow()->draw(*this);
+	renderObject();
 
 	/*
 	std::vector<Bullet*>::iterator bullet;
@@ -90,6 +92,9 @@ void Ship::handleInput()
 		{
 			m_fireDelay = FIRE_DELAY;
 			m_bulletSound.play();
+			//Object<Bullet> bullet;
+			//bullet.get()->set(body()->GetPosition(), body()->GetAngle());
+			//scene()->addObject<Bullet>(&bullet);
 			//m_Bullets.push_back(new Bullet(scene(), body()->GetPosition(), body()->GetAngle()));
 			//scene()->addObject(new Bullet(scene(), body()->GetPosition(), body()->GetAngle()));
 		}

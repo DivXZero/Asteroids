@@ -2,30 +2,67 @@
 #ifndef SCENE_H
 #define SCENE_H
 
-#include "SharedScene.h"
-#include "SharedObject.h"
-#include <vector>
+#include "system/Window.h"
+#include "system/Physics.h"
+#include "system/ObjectCollection.h"
 
-class Scene : public SharedScene
+class Scene
 {
 public:
 	Scene() {}
 	~Scene() {}
 
-	void init();
+	virtual void init() = 0;
+	virtual void update() = 0;
+	virtual void render() = 0;
 	void init(Window* window, Physics* physics, Event* event);
-	void update();
-	void render();
+	void updateScene();
+	void renderScene();
 	void draw(sf::Shape& shape) { window()->getWindow()->draw(shape); }
 
-	void addObject(SharedObject* object) { object->init(this);  m_Objects.push_back(object); }
-	void destroyObject(SharedObject* object) { for (m_ObjectIter = m_Objects.begin(); m_ObjectIter != m_Objects.end();) { if (object == (*m_ObjectIter)) { delete *m_ObjectIter; m_Objects.erase(m_ObjectIter); } } }
-	void updateObjects() { for (m_ObjectIter = m_Objects.begin(); m_ObjectIter != m_Objects.end();) { (*m_ObjectIter)->update(); } }
-	void renderObjects() { for (m_ObjectIter = m_Objects.begin(); m_ObjectIter != m_Objects.end();) { (*m_ObjectIter)->render(); } }
+	void setWindow(Window* window) { m_Window = window; }
+	void setPhysics(Physics* physics) { m_Physics = physics; }
+	void setEvent(Event* event) { m_Event = event; }
+	Window* window() { return m_Window; }
+	Physics* physics() { return m_Physics; }
+	Event* event() { return m_Event; }
+
+	template <class T> void addObject(Object<T>* object);
+	template <class T> void updateCollection();
+	template <class T> void renderCollection();
+
+	template <class T> ObjectCollection<T>* getObjectCollection();
 
 private:
-	std::vector<SharedObject*> m_Objects;
-	std::vector<SharedObject*>::iterator m_ObjectIter;
+	Window* m_Window;
+	Physics* m_Physics;
+	Event* m_Event;
 };
+
+template <class T>
+void Scene::addObject(Object<T>* object)
+{
+	object->get()->setScene(this);
+	object->init();
+	getObjectCollection<T>()->addObject(object);
+}
+
+template <class T>
+void Scene::updateCollection()
+{
+	getObjectCollection<T>()->update();
+}
+
+template <class T>
+void Scene::renderCollection()
+{
+	getObjectCollection<T>()->render();
+}
+
+template <class T>
+ObjectCollection<T>* Scene::getObjectCollection()
+{
+	return ObjectCollectionSingleton<T>::Instance();
+}
 
 #endif

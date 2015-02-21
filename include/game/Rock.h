@@ -11,15 +11,15 @@ public:
 	Rock() {}
 	~Rock() {}
 
-	void init(SharedScene* ownerScene);
+	void init();
 	void update();
 	void render();
 
 private:
 	void checkOffscreen();
 	int m_colorFade;
-	sf::SoundBuffer m_explodeBuffer;
-	sf::Sound m_explodeSound;
+	//sf::SoundBuffer m_explodeBuffer;
+	//sf::Sound m_explodeSound;
 };
 
 #endif

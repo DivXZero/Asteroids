@@ -7,9 +7,14 @@ Bullet::~Bullet()
 	scene()->physics()->world()->DestroyBody(body());
 }
 
-void Bullet::init(SharedScene* ownerScene, b2Vec2 pos, float angle)
+void Bullet::init()
 {
-	GameObject::init(ownerScene);
+	m_lifeTime = 0;
+	m_isAlive = true;
+}
+
+void Bullet::set(b2Vec2 pos, float angle)
+{
 	setAsBox(2, 2);
 	setColors(sf::Color(255, 255, 255, 255));
 
@@ -20,9 +25,6 @@ void Bullet::init(SharedScene* ownerScene, b2Vec2 pos, float angle)
 	float velocityX = glm::sin(angle) * BULLET_SPEED * body()->GetMass();
 	float velocityY = -glm::cos(angle) * BULLET_SPEED * body()->GetMass();
 	body()->ApplyForceToCenter(b2Vec2(velocityX, velocityY), true);
-
-	m_lifeTime = 0;
-	m_isAlive = true;
 }
 
 void Bullet::update()
@@ -32,6 +34,13 @@ void Bullet::update()
 
 	if (getLifeTime() > BULLET_LIFETIME)
 		m_isAlive = false;
+}
+
+void Bullet::render()
+{
+	RenderableObject::setPosition(body()->GetPosition().x * Physics::Scale, body()->GetPosition().y * Physics::Scale);
+	RenderableObject::setRotation(glm::degrees(body()->GetAngle()));
+	renderObject();
 }
 
 void Bullet::checkOffscreen()

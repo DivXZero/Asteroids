@@ -18,7 +18,7 @@ public:
 	Ship() {}
 	~Ship() {}
 
-	void init(SharedScene* ownerScene);
+	void init();
 	void update();
 	void render();
 

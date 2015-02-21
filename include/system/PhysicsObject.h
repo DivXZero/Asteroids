@@ -4,12 +4,12 @@
 
 #include <Box2D/Box2D.h>
 #include <glm/glm.hpp>
-#include <iostream>
+#include "system/SharedObject.h"
 
-class PhysicsObject
+class PhysicsObject : public SharedObject
 {
 public:
-	PhysicsObject() {}
+	PhysicsObject() : m_isContacting(false) {}
 	~PhysicsObject() {}
 
 	b2Body* body() { return m_Body; }
