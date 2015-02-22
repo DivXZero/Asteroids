@@ -17,6 +17,8 @@ public:
 
 	int getSize() { return m_Objects.size(); }
 
+	std::vector<Object<T>*>* getObjects() { return &m_Objects; }
+
 private:
 	std::vector<Object<T>*> m_Objects;
 };
@@ -35,18 +37,21 @@ void ObjectCollection<T>::update()
 {
 	for (auto objIter = m_Objects.begin(); objIter != m_Objects.end();)
 	{
-		(*objIter)->update();
+		if ((*objIter) != nullptr)
+		{
+			(*objIter)->update();
 
-		if ((*objIter)->isAlive())
-		{
-			objIter++;
+			if ((*objIter)->isAlive())
+			{
+				objIter++;
+			}
+			else
+			{
+				(*objIter)->destroy();
+				delete (*objIter);
+				objIter = m_Objects.erase(objIter);
+			}
 		}
-		else
-		{
-			(*objIter)->destroy();
-			delete *objIter;
-			objIter = m_Objects.erase(objIter);
-		}	
 	}
 }
 
@@ -54,7 +59,15 @@ template <class T>
 void ObjectCollection<T>::render()
 {
 	for (auto objIter = m_Objects.begin(); objIter != m_Objects.end(); objIter++)
-		(*objIter)->render();
+	{
+		if ((*objIter) != nullptr)
+		{
+			if ((*objIter)->isAlive())
+			{
+				(*objIter)->render();
+			}
+		}
+	}
 }
 
 #endif

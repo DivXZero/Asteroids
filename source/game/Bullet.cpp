@@ -26,8 +26,10 @@ void Bullet::update()
 	m_lifeTime++;
 	checkOffscreen();
 
-	if (getLifeTime() > BULLET_LIFETIME)
+	if (getLifeTime() > BULLET_LIFETIME || isColliding<Rock>())
+	{
 		destroy();
+	}
 }
 
 void Bullet::render()
@@ -56,5 +58,5 @@ void Bullet::checkOffscreen()
 
 void Bullet::cleanup()
 {
-
+	
 }

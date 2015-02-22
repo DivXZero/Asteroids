@@ -16,9 +16,14 @@ public:
 	void render();
 	void cleanup();
 
+	void set(float scale);
+	float getScale() { return m_Scale; }
+
 private:
 	void checkOffscreen();
 	int m_colorFade;
+	float m_Scale;
+
 	sf::SoundBuffer m_explodeBuffer;
 	sf::Sound m_explodeSound;
 };

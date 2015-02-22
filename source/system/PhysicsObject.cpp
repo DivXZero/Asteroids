@@ -85,3 +85,11 @@ void PhysicsObject::endContact()
 	m_collideObject = nullptr;
 	m_isContacting = false;
 }
+
+bool PhysicsObject::isColliding()
+{
+	if (m_isContacting && (m_collideObject != nullptr))
+		return true;
+
+	return false;
+}

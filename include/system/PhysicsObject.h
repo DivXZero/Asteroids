@@ -16,6 +16,7 @@ public:
 	void setBody(b2Body* body);
 	void createBody(b2World* world);
 	void createBody(b2World* world, b2BodyType type, float linearDamping, float angularDamping, float density);
+	void destroyBody(b2World* world) { world->DestroyBody(m_Body); }
 	void setPosition(float x, float y);
 	void setBodyType(b2BodyType type);
 	void setLinearDamping(float amt);
@@ -28,7 +29,7 @@ public:
 	void applyTorque(float amt) { body()->ApplyTorque(amt, true); }
 	void startContact(PhysicsObject* object);
 	void endContact();
-	bool isColliding() { return m_isContacting; }
+	bool isColliding();
 	template <class T> bool isType();
 	template <class T> T* getType();
 	template <class T> bool isColliding();

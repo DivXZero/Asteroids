@@ -17,7 +17,10 @@ void GameObject::destroyObject()
 {
 	m_isAlive = false;
 
-	scene()->physics()->world()->DestroyBody(body());
+	cleanup();
+	// need to move this somewhere
+	//scene()->physics()->world()->DestroyBody(body());
+	destroyBody(scene()->physics()->world());
 }
 
 void GameObject::setPosition(float x, float y)
