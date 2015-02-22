@@ -15,6 +15,8 @@ public:
 	void update();
 	void render();
 
+	int getSize() { return m_Objects.size(); }
+
 private:
 	std::vector<Object<T>*> m_Objects;
 };
@@ -27,35 +29,31 @@ void ObjectCollection<T>::addObject(Object<T>* object)
 {
 	m_Objects.push_back(object);
 }
-/*
-
-template <class T>
-void ObjectCollection::destroyObject(Object<T>* object)
-{
-
-
-	(*objIter)->destroy();
-	delete *objIter;
-	m_Object.erase(m_ObjIter);
-
-
-}
-}
-*/
 
 template <class T>
 void ObjectCollection<T>::update()
 {
-	typename std::vector<Object<T>*>::iterator objIter;
-	for (objIter = m_Objects.begin(); objIter != m_Objects.end(); objIter++)
+	for (auto objIter = m_Objects.begin(); objIter != m_Objects.end();)
+	{
 		(*objIter)->update();
+
+		if ((*objIter)->isAlive())
+		{
+			objIter++;
+		}
+		else
+		{
+			(*objIter)->destroy();
+			delete *objIter;
+			objIter = m_Objects.erase(objIter);
+		}	
+	}
 }
 
 template <class T>
 void ObjectCollection<T>::render()
 {
-	typename std::vector<Object<T>*>::iterator objIter;
-	for (objIter = m_Objects.begin(); objIter != m_Objects.end(); objIter++)
+	for (auto objIter = m_Objects.begin(); objIter != m_Objects.end(); objIter++)
 		(*objIter)->render();
 }
 

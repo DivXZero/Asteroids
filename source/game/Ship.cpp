@@ -18,23 +18,6 @@ void Ship::init()
 
 void Ship::update()
 {
-	/*
-	std::vector<Bullet*>::iterator bullet;
-	for (bullet = m_Bullets.begin(); bullet != m_Bullets.end();)
-	{
-		(*bullet)->update();
-
-		if (!(*bullet)->isAlive())
-		{
-			delete *bullet;
-			bullet = m_Bullets.erase(bullet);
-		}
-		else {
-			bullet++;
-		}
-	}
-	*/
-
 	handleInput();
 	checkOffscreen();
 
@@ -53,14 +36,6 @@ void Ship::render()
 	renderObject();
 	RenderableObject::setPosition(currentX, mirrorY);
 	renderObject();
-
-	/*
-	std::vector<Bullet*>::iterator bullet;
-	for (bullet = m_Bullets.begin(); bullet < m_Bullets.end(); bullet++)
-	{
-		(*bullet)->render();
-	}
-	*/
 }
 
 void Ship::handleInput()
@@ -88,11 +63,10 @@ void Ship::handleInput()
 		{
 			m_fireDelay = FIRE_DELAY;
 			m_bulletSound.play();
-			//Object<Bullet> bullet;
-			//bullet.get()->set(body()->GetPosition(), body()->GetAngle());
-			//scene()->addObject<Bullet>(&bullet);
-			//m_Bullets.push_back(new Bullet(scene(), body()->GetPosition(), body()->GetAngle()));
-			//scene()->addObject(new Bullet(scene(), body()->GetPosition(), body()->GetAngle()));
+
+			Object<Bullet>* bullet = new Object<Bullet>;
+			scene()->addObject<Bullet>(bullet);
+			bullet->get()->set(body()->GetPosition(), body()->GetAngle());
 		}
 	}
 }
@@ -112,4 +86,9 @@ void Ship::checkOffscreen()
 
 	if (position.y < 0)
 		body()->SetTransform(b2Vec2(position.x / Physics::Scale, scene()->window()->getHeight() / Physics::Scale), body()->GetAngle());
+}
+
+void Ship::cleanup()
+{
+
 }

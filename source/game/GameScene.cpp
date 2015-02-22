@@ -1,12 +1,14 @@
 
 #include "game/GameScene.h"
 
+#define MAX_ROCKS 50
+
 void GameScene::init()
 {
 	addObject<Ship>(&m_ship);
 
 	for (int i = 0; i < MAX_ROCKS; i++)
-		addObject<Rock>(&m_rockObject[i]);
+		addObject<Rock>(new Object<Rock>);
 }
 
 void GameScene::update()

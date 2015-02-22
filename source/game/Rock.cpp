@@ -29,8 +29,8 @@ void Rock::init()
 	points[5][0] = (float)glm::linearRand(0, 20); points[5][1] = (float)glm::linearRand(0, 20);
 	points[6][0] = 0; points[6][1] = (float)glm::linearRand(20, 40);
 	points[7][0] = (float)glm::linearRand(-40, -20); points[7][1] = (float)glm::linearRand(10, 30);
-	//setPoints(8, points);
-	setAsBox(20, 20);
+	setPoints(8, points);
+	//setAsBox(60, 60);
 	setColors();
 	
 	sf::Vector2f pos = getRandomPosition((int)scene()->window()->getWidth(), (int)scene()->window()->getHeight());
@@ -44,19 +44,20 @@ void Rock::init()
 	float velocityY = (float)glm::linearRand(-5000, 5000);
 	body()->ApplyForceToCenter(b2Vec2(velocityX, velocityY), true);
 
-	//m_explodeBuffer.loadFromFile("resources/audio/explode1.wav");
-	//m_explodeSound.setBuffer(m_explodeBuffer);
-	//m_explodeSound.setVolume(10.0f);
+	m_explodeBuffer.loadFromFile("resources/audio/explode1.wav");
+	m_explodeSound.setBuffer(m_explodeBuffer);
+	m_explodeSound.setVolume(10.0f);
 
 	m_colorFade = 0;
 }
 
 void Rock::update()
 {
-	if (isColliding<Ship>())
+	if (isColliding<Bullet>())
 	{
-		//m_explodeSound.play();
-		//getCollider<Bullet>()->destroy();
+		m_explodeSound.play();
+		getCollider<Bullet>()->destroy();
+		destroy();
 		m_colorFade = 200;
 	}
 	else
@@ -98,4 +99,10 @@ void Rock::checkOffscreen()
 
 	if (position.y < 0)
 		body()->SetTransform(b2Vec2(position.x / Physics::Scale, scene()->window()->getHeight() / Physics::Scale), body()->GetAngle());
+}
+
+void Rock::cleanup()
+{
+	//m_explodeSound.stop();
+	//m_explodeSound.resetBuffer();
 }

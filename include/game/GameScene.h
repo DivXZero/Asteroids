@@ -6,8 +6,6 @@
 #include "game/Ship.h"
 #include "game/Rock.h"
 
-#define MAX_ROCKS 500
-
 class GameScene : public Scene
 {
 public:
@@ -20,7 +18,6 @@ public:
 
 private:
 	Object<Ship> m_ship;
-	Object<Rock> m_rockObject[MAX_ROCKS];
 };
 
 #endif	// ASTEROIDS_SCENE_H

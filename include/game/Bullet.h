@@ -10,21 +10,19 @@
 class Bullet : public GameObject
 {
 public:
-	Bullet() : m_isAlive(false) {}
-	~Bullet();
+	Bullet() {}
+	~Bullet() {}
 
 	void init();
 	void set(b2Vec2 pos, float angle);
 	void update();
 	void render();
+	void cleanup();
 	int getLifeTime() { return m_lifeTime; }
-	bool isAlive() { return m_isAlive; }
-	void destroy();
 
 private:
 	void checkOffscreen();
 	int m_lifeTime;
-	bool m_isAlive;
 };
 
 #endif

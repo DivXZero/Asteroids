@@ -14,12 +14,13 @@ public:
 	void init();
 	void update();
 	void render();
+	void cleanup();
 
 private:
 	void checkOffscreen();
 	int m_colorFade;
-	//sf::SoundBuffer m_explodeBuffer;
-	//sf::Sound m_explodeSound;
+	sf::SoundBuffer m_explodeBuffer;
+	sf::Sound m_explodeSound;
 };
 
 #endif

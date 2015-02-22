@@ -15,6 +15,7 @@ public:
 	void update() { get()->updateObject(); get()->update(); }
 	void render() { get()->renderObject(); get()->render(); }
 	void destroy() { get()->destroyObject(); get()->destroy(); }
+	bool isAlive() { return get()->isAlive(); }
 
 	T* get() { return m_Object; }
 

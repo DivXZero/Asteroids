@@ -2,15 +2,9 @@
 #include "game/Bullet.h"
 #include "game/Rock.h"
 
-Bullet::~Bullet()
-{
-	scene()->physics()->world()->DestroyBody(body());
-}
-
 void Bullet::init()
 {
 	m_lifeTime = 0;
-	m_isAlive = true;
 }
 
 void Bullet::set(b2Vec2 pos, float angle)
@@ -33,7 +27,7 @@ void Bullet::update()
 	checkOffscreen();
 
 	if (getLifeTime() > BULLET_LIFETIME)
-		m_isAlive = false;
+		destroy();
 }
 
 void Bullet::render()
@@ -60,7 +54,7 @@ void Bullet::checkOffscreen()
 		body()->SetTransform(b2Vec2(position.x / Physics::Scale, scene()->window()->getHeight() / Physics::Scale), body()->GetAngle());
 }
 
-void Bullet::destroy()
+void Bullet::cleanup()
 {
-	m_isAlive = false;
+
 }

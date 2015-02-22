@@ -15,7 +15,9 @@ void GameObject::renderObject()
 
 void GameObject::destroyObject()
 {
-	// dunno?
+	m_isAlive = false;
+
+	scene()->physics()->world()->DestroyBody(body());
 }
 
 void GameObject::setPosition(float x, float y)

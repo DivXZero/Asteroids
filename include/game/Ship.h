@@ -21,6 +21,7 @@ public:
 	void init();
 	void update();
 	void render();
+	void cleanup();
 
 private:
 	void handleInput();
