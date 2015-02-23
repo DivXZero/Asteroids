@@ -35,7 +35,7 @@ Object<T>* ObjectCollection<T>::addObject()
 template <class T>
 void ObjectCollection<T>::update()
 {
-	for (std::vector<std::unique_ptr<Object<T>>>::iterator obj = m_Objects.begin(); obj != m_Objects.end();)
+	for (typename std::vector<std::unique_ptr<Object<T>>>::iterator obj = m_Objects.begin(); obj != m_Objects.end();)
 	{
 		if (!(*obj)->isAlive())
 		{
