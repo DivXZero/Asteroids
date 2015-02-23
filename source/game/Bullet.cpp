@@ -1,6 +1,7 @@
 
 #include "game/Bullet.h"
 #include "game/Rock.h"
+#include "game/Ship.h"
 
 void Bullet::init()
 {
@@ -26,8 +27,18 @@ void Bullet::update()
 	m_lifeTime++;
 	checkOffscreen();
 
-	if (getLifeTime() > BULLET_LIFETIME || isColliding<Rock>())
+	if (getLifeTime() > BULLET_LIFETIME || isColliding())
 	{
+		if (isColliding<Rock>())
+		{
+			float scale = getCollider<Rock>()->getScale();
+			if (scale < 3)
+			{
+				scene()->addObject<Rock>()->get()->set(scale + 1, getCollider<Rock>()->getPosition(), body()->GetAngle());
+				scene()->addObject<Rock>()->get()->set(scale + 1, getCollider<Rock>()->getPosition(), -body()->GetAngle());
+			}
+		}
+
 		destroy();
 	}
 }

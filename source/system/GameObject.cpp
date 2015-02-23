@@ -19,8 +19,8 @@ void GameObject::destroyObject()
 
 	cleanup();
 	// need to move this somewhere
-	//scene()->physics()->world()->DestroyBody(body());
-	destroyBody(scene()->physics()->world());
+	scene()->physics()->world()->DestroyBody(body());
+	//destroyBody(scene()->physics()->world());
 }
 
 void GameObject::setPosition(float x, float y)

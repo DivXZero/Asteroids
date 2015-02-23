@@ -34,6 +34,7 @@ public:
 	template <class T> T* getType();
 	template <class T> bool isColliding();
 	template <class T> T* getCollider();
+	PhysicsObject* getCollider() { return getCollider<PhysicsObject>(); }
 	// const char* getTypeName() { return typeid(*this).name(); }
 	virtual void update() = 0;
 

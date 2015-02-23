@@ -2,13 +2,12 @@
 #ifndef ASTEROIDS_ROCK_H
 #define ASTEROIDS_ROCK_H
 
-#include <SFML/Audio.hpp>
 #include "system/GameObject.h"
 
 class Rock : public GameObject
 {
 public:
-	Rock() {}
+	Rock() : m_Scale(1.0f) {}
 	~Rock() {}
 
 	void init();
@@ -16,16 +15,14 @@ public:
 	void render();
 	void cleanup();
 
-	void set(float scale);
+	void setScale(float scale) { m_Scale = scale; setAsBox(60.0f / m_Scale, 60.0f / m_Scale); }
 	float getScale() { return m_Scale; }
+	void set(float scale, sf::Vector2f pos, float angle);
+	void set(float scale);
 
 private:
 	void checkOffscreen();
-	int m_colorFade;
 	float m_Scale;
-
-	sf::SoundBuffer m_explodeBuffer;
-	sf::Sound m_explodeSound;
 };
 
 #endif

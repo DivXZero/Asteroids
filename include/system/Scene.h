@@ -27,7 +27,7 @@ public:
 	Physics* physics() { return m_Physics; }
 	Event* event() { return m_Event; }
 
-	template <class T> void addObject(Object<T>* object);
+	template <class T> Object<T>* addObject();
 	template <class T> void updateCollection();
 	template <class T> void renderCollection();
 
@@ -40,11 +40,12 @@ private:
 };
 
 template <class T>
-void Scene::addObject(Object<T>* object)
+Object<T>* Scene::addObject()
 {
+	Object<T>* object = getObjectCollection<T>()->addObject();
 	object->get()->setScene(this);
 	object->init();
-	getObjectCollection<T>()->addObject(object);
+	return object;
 }
 
 template <class T>

@@ -10,47 +10,42 @@ template <class T>
 class ObjectCollection
 {
 public:
-	void addObject(Object<T>* object);
+	Object<T>* addObject();
 	//void destroyObject(Object<T>* object);
 	void update();
 	void render();
 
 	int getSize() { return m_Objects.size(); }
 
-	std::vector<Object<T>*>* getObjects() { return &m_Objects; }
-
 private:
-	std::vector<Object<T>*> m_Objects;
+	std::vector<std::unique_ptr<Object<T>>> m_Objects;
 };
 
 template <class T>
 using ObjectCollectionSingleton = Singleton<ObjectCollection<T>>;
 
 template <class T>
-void ObjectCollection<T>::addObject(Object<T>* object)
+Object<T>* ObjectCollection<T>::addObject()
 {
-	m_Objects.push_back(object);
+	m_Objects.push_back(std::make_unique<Object<T>>());
+	return m_Objects.back().get();
 }
 
 template <class T>
 void ObjectCollection<T>::update()
 {
-	for (auto objIter = m_Objects.begin(); objIter != m_Objects.end();)
+	for (std::vector<std::unique_ptr<Object<T>>>::iterator obj = m_Objects.begin(); obj != m_Objects.end();)
 	{
-		if ((*objIter) != nullptr)
+		if (!(*obj)->isAlive())
 		{
-			(*objIter)->update();
-
-			if ((*objIter)->isAlive())
-			{
-				objIter++;
-			}
-			else
-			{
-				(*objIter)->destroy();
-				delete (*objIter);
-				objIter = m_Objects.erase(objIter);
-			}
+			(*obj)->get()->destroyObject();
+			obj->reset();
+			obj = m_Objects.erase(obj);
+		}
+		else
+		{
+			(*obj)->update();
+			obj++;
 		}
 	}
 }
@@ -58,15 +53,10 @@ void ObjectCollection<T>::update()
 template <class T>
 void ObjectCollection<T>::render()
 {
-	for (auto objIter = m_Objects.begin(); objIter != m_Objects.end(); objIter++)
+	for (auto& obj : m_Objects)
 	{
-		if ((*objIter) != nullptr)
-		{
-			if ((*objIter)->isAlive())
-			{
-				(*objIter)->render();
-			}
-		}
+		if (obj->isAlive())
+			obj->render();
 	}
 }
 

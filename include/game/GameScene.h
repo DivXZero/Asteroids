@@ -6,7 +6,7 @@
 #include "game/Ship.h"
 #include "game/Rock.h"
 
-#define MAX_ROCKS 50
+#define MAX_ROCKS 25
 
 class GameScene : public Scene
 {
@@ -17,10 +17,6 @@ public:
 	void init();
 	void update();
 	void render();
-
-private:
-	Object<Ship> m_ship;
-	Object<Rock>* rock[MAX_ROCKS];
 };
 
 #endif	// ASTEROIDS_SCENE_H

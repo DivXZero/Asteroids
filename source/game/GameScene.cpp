@@ -4,14 +4,12 @@
 
 void GameScene::init()
 {
-	addObject<Ship>(&m_ship);
-
 	for (int i = 0; i < MAX_ROCKS; i++)
 	{
-		rock[i] = new Object<Rock>();
-		rock[i]->get()->set(1);
-		addObject<Rock>(rock[i]);
+		addObject<Rock>()->get()->set(1);
 	}
+
+	addObject<Ship>();
 }
 
 void GameScene::update()

@@ -18,7 +18,7 @@ public:
 	Ship() {}
 	~Ship() {}
 
-	void init();
+	void init() final;
 	void update();
 	void render();
 	void cleanup();
@@ -26,7 +26,7 @@ public:
 private:
 	void handleInput();
 	void checkOffscreen();
-	std::vector<Bullet*> m_Bullets;
+
 	int m_fireDelay;
 	sf::SoundBuffer m_bulletBuffer;
 	sf::Sound m_bulletSound;

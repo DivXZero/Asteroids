@@ -64,9 +64,7 @@ void Ship::handleInput()
 			m_fireDelay = FIRE_DELAY;
 			m_bulletSound.play();
 
-			Object<Bullet>* bullet = new Object<Bullet>;
-			scene()->addObject<Bullet>(bullet);
-			bullet->get()->set(body()->GetPosition(), body()->GetAngle());
+			scene()->addObject<Bullet>()->get()->set(body()->GetPosition(), body()->GetAngle());;
 		}
 	}
 }

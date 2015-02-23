@@ -3,7 +3,6 @@
 #include "game/Ship.h"
 #include "game/Rock.h"
 #include "game/Bullet.h"
-#include <iostream>
 
 sf::Vector2f getRandomPosition(int w, int h)
 {
@@ -18,46 +17,36 @@ sf::Vector2f getRandomPosition(int w, int h)
 	return sf::Vector2f((float)x, (float)y);
 }
 
-void Rock::init()
+void Rock::set(float scale)
 {
-	//float points[8][2] = { { -40, 0 }, { -35, -20 }, { -20, -25 }, { -20, -40 }, { 0, -45 }, { 10, -30 }, { 20, -25 }, { 20, -10 } };
-	float points[8][2];
-	points[0][0] = (float)glm::linearRand(-40, -20); points[0][1] = 0;
-	points[1][0] = (float)glm::linearRand(-20, 0); points[1][1] = (float)glm::linearRand(-30, -10);
-	points[2][0] = 0; points[2][1] = (float)glm::linearRand(-40, -20);
-	points[3][0] = (float)glm::linearRand(20, 40); points[3][1] = (float)glm::linearRand(-30, -10);
-	points[4][0] = (float)glm::linearRand(20, 40); points[4][1] = 0;
-	points[5][0] = (float)glm::linearRand(0, 20); points[5][1] = (float)glm::linearRand(0, 20);
-	points[6][0] = 0; points[6][1] = (float)glm::linearRand(20, 40);
-	points[7][0] = (float)glm::linearRand(-40, -20); points[7][1] = (float)glm::linearRand(10, 30);
-	//setPoints(8, points);
-	//setAsBox(60 / m_Scale, 60 / m_Scale);
+	set(scale, getRandomPosition((int)scene()->window()->getWidth(), (int)scene()->window()->getHeight()), glm::linearRand(0, 360));
+}
+
+void Rock::set(float scale, sf::Vector2f pos, float angle)
+{
+	setScale(scale);
+
+	setAsBox(60 / m_Scale, 60 / m_Scale);
 	setColors();
-	
-	if (m_Scale == 1)
-	{
-		sf::Vector2f pos = getRandomPosition((int)scene()->window()->getWidth(), (int)scene()->window()->getHeight());
-		setPosition(pos.x, pos.y);
-	}
+
+	setPosition(pos.x, pos.y);
 
 	createBody(scene()->physics()->world(), b2_dynamicBody, 0, 0, 5.0f);
 
-	if (m_Scale == 1)
-		applyTorque((float)glm::linearRand(-2000, 2000));
+	applyTorque((float)glm::linearRand(-2000, 2000));
 
-	float velocityX = (float)glm::linearRand(-5000, 5000);
-	float velocityY = (float)glm::linearRand(-5000, 5000);
+	//float velocityX = (float)glm::linearRand(-5000, 5000);
+	//float velocityY = (float)glm::linearRand(-5000, 5000);
+
+	float velocityX = sin(glm::degrees(angle)) * m_Scale;
+	float velocityY = cos(glm::degrees(angle)) * m_Scale;
+
 	body()->ApplyForceToCenter(b2Vec2(velocityX, velocityY), true);
-
-	m_explodeBuffer.loadFromFile("resources/audio/explode1.wav");
-	m_explodeSound.setBuffer(m_explodeBuffer);
-	m_explodeSound.setVolume(10.0f);
 }
 
-void Rock::set(float scale)
-{ 
-	m_Scale = scale;
-	setAsBox(60 / m_Scale, 60 / m_Scale);
+void Rock::init()
+{
+	
 }
 
 void Rock::update()
@@ -66,19 +55,6 @@ void Rock::update()
 
 	if (isColliding<Bullet>())
 	{
-		m_explodeSound.play();
-		getCollider<Bullet>()->update();
-
-		/*
-		if (getScale() < 3)
-		{
-			Object<Rock>* rock = new Object<Rock>;
-			rock->get()->set(getScale() + 1);
-			rock->get()->setPosition(getPosition().x, getPosition().y);
-			scene()->addObject(rock);
-		}
-		*/
-
 		destroy();
 	}
 }
@@ -115,6 +91,5 @@ void Rock::checkOffscreen()
 
 void Rock::cleanup()
 {
-	//m_explodeSound.stop();
-	//m_explodeSound.resetBuffer();
+	
 }
