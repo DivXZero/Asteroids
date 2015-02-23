@@ -16,6 +16,7 @@ public:
 	void render();
 
 	int getSize() { return m_Objects.size(); }
+	std::vector<std::unique_ptr<Object<T>>>* getObjects() { return &m_Objects; }
 
 private:
 	std::vector<std::unique_ptr<Object<T>>> m_Objects;

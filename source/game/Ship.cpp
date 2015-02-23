@@ -10,7 +10,7 @@ void Ship::init()
 	setPosition(((float)scene()->window()->getCenter().x) - 10, ((float)scene()->window()->getCenter().y) - 10);
 	createBody(scene()->physics()->world(), b2_dynamicBody, 0.5f, 5.0f, 5.0f);
 
-	m_bulletBuffer.loadFromFile("resources/audio/shoot.wav");
+	m_bulletBuffer.loadFromFile("resources/audio/fire.wav");
 	m_bulletSound.setBuffer(m_bulletBuffer);
 
 	m_fireDelay = 0;

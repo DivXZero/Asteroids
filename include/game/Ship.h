@@ -10,7 +10,7 @@
 
 #define ACCELERATION 20.0f
 #define ROTATION 5.0f
-#define FIRE_DELAY 30
+#define FIRE_DELAY 10
 
 class Ship : public GameObject
 {
