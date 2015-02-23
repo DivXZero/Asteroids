@@ -2,7 +2,7 @@
 #ifndef ASTEROIDS_SCENE_H
 #define ASTEROIDS_SCENE_H
 
-#include "SFML/Audio.hpp">
+#include "SFML/Audio.hpp"
 #include "system/Scene.h"
 #include "game/Ship.h"
 #include "game/Rock.h"
