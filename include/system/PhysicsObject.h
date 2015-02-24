@@ -30,6 +30,7 @@ public:
 	void startContact(PhysicsObject* object);
 	void endContact();
 	bool isColliding();
+	bool isMouseOver();
 	template <class T> bool isType();
 	template <class T> T* getType();
 	template <class T> bool isColliding();

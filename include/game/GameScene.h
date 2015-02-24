@@ -7,7 +7,7 @@
 #include "game/Ship.h"
 #include "game/Rock.h"
 
-#define MAX_ROCKS 200
+#define MAX_ROCKS 5
 
 class GameScene : public Scene
 {

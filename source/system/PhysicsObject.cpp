@@ -93,3 +93,8 @@ bool PhysicsObject::isColliding()
 
 	return false;
 }
+
+bool PhysicsObject::isMouseOver()
+{
+	return false;
+}

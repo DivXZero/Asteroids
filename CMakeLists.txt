@@ -9,14 +9,7 @@ include("source/CMakeLists.txt")
 add_executable(${PROJECT_NAME} ${SOURCE_FILES} ${HEADER_FILES})
 
 if(UNIX)
-	list( APPEND CMAKE_CXX_FLAGS "-std=c++0x ${CMAKE_CXX_FLAGS}")
-	
-	find_package(OpenAL REQUIRED)
-	if(OPENAL_FOUND)
-		message(STATUS "OpenAL Found")
-		include_directories(${OPENAL_INCLUDE_DIR})
-		target_link_libraries(${PROJECT_NAME} ${OPENAL_LIBRARY})
-	endif()
+	list( APPEND CMAKE_CXX_FLAGS "-std=c++14 ${CMAKE_CXX_FLAGS}")
 endif()
 
 source_group("Header Files\\Game" FILES ${GAME_HEADER_FILES})
