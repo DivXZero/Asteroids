@@ -108,19 +108,22 @@ void GameScene::reset(int stage)
 
 	if (stage > 0)
 	{
-		for (auto& rock : *getObjectCollection<Rock>()->getObjects())
+		if (stage > 1)
 		{
-			rock->destroy();
-		}
+			for (auto& rock : *getObjectCollection<Rock>()->getObjects())
+			{
+				rock->destroy();
+			}
 
-		for (auto& bullet : *getObjectCollection<Bullet>()->getObjects())
-		{
-			bullet->destroy();
-		}
+			for (auto& bullet : *getObjectCollection<Bullet>()->getObjects())
+			{
+				bullet->destroy();
+			}
 
-		for (auto& ship : *getObjectCollection<Ship>()->getObjects())
-		{
-			ship->destroy();
+			for (auto& ship : *getObjectCollection<Ship>()->getObjects())
+			{
+				ship->destroy();
+			}
 		}
 
 		for (int i = 0; i < MAX_ROCKS * stage; i++)

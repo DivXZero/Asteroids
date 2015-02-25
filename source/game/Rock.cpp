@@ -46,7 +46,7 @@ void Rock::set(float scale, sf::Vector2f pos, float angle)
 
 void Rock::init()
 {
-	
+	setVisible(true);
 }
 
 void Rock::update()

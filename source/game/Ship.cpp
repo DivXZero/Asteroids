@@ -2,6 +2,32 @@
 #include "game/GameScene.h"
 #include "game/Ship.h"
 
+void Thruster::init()
+{
+	float points[4][2] = { { -5, 8 }, { 0, 2 }, { 5, 8 }, {0, 20} };
+	setColors();
+	setPoints(4, points);
+	setVisible(true);
+}
+
+void Thruster::set(sf::Vector2f pos, float angle)
+{
+	setPosition(pos);
+	setRotation(angle);
+}
+
+void Thruster::update()
+{
+}
+
+void Thruster::render()
+{
+}
+
+void Thruster::cleanup()
+{
+}
+
 void Ship::init()
 {
 	float points[4][2] = { { -10, 10 }, { 0, -20 }, { 10, 10 }, {0, 0} };
@@ -28,6 +54,10 @@ void Ship::init()
 	m_lives = 3;
 	m_thumpTime = 0;
 	m_thumpSwitch = true;
+
+	m_Thruster.init();
+	m_isThrusting = false;
+	m_thrustSwitch = false;
 }
 
 void Ship::update()
@@ -75,10 +105,21 @@ void Ship::update()
 	{
 		reset();
 	}
+
+	m_Thruster.set(getPosition(), getRotation());
 }
 
 void Ship::render()
 {
+	if (m_isThrusting)
+	{
+		m_thrustSwitch = !m_thrustSwitch;
+		if (m_thrustSwitch)
+		{
+			scene()->draw(m_Thruster);
+		}
+	}
+
 	float currentX = getPosition().x;
 	float currentY = getPosition().y;
 	float mirrorX = (currentX < scene()->window()->getCenter().x) ? currentX + scene()->window()->getWidth() : currentX - scene()->window()->getWidth();
@@ -104,6 +145,7 @@ void Ship::handleInput()
 	// Forward
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 	{
+		m_isThrusting = true;
 		if (m_thrustSound.getStatus() == sf::Sound::Status::Stopped)
 		{
 			m_thrustSound.play();
@@ -115,6 +157,7 @@ void Ship::handleInput()
 	}
 	else
 	{
+		m_isThrusting = false;
 		if (m_thrustSound.getStatus() == sf::Sound::Status::Playing)
 		{
 			m_thrustSound.stop();

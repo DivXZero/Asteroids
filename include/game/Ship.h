@@ -17,6 +17,23 @@
 
 #define THUMP_DELAY 65
 
+#define THRUST_DELAY 5
+
+class Thruster : public RenderableObject
+{
+public:
+	Thruster() {}
+	~Thruster() {}
+
+	void init();
+	void update();
+	void render();
+	void cleanup();
+	void destroy() {}
+
+	void set(sf::Vector2f pos, float angle);
+};
+
 class Ship : public GameObject
 {
 public:
@@ -50,6 +67,10 @@ private:
 	sf::Sound m_thumpHiSound;
 	int m_thumpTime;
 	bool m_thumpSwitch;
+
+	Thruster m_Thruster;
+	bool m_thrustSwitch;
+	bool m_isThrusting;
 };
 
 #endif

@@ -6,6 +6,7 @@
 void Bullet::init()
 {
 	m_lifeTime = 0;
+	setVisible(true);
 }
 
 void Bullet::set(b2Vec2 pos, float angle)
