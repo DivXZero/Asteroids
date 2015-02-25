@@ -17,6 +17,7 @@ public:
 	void render() { get()->renderObject(); get()->render(); }
 	void destroy() { get()->destroy(); }
 	bool isAlive() { return get()->isAlive(); }
+	bool isVisible() { return get()->isVisible(); }
 
 	T* get() { return m_pObject.get(); }
 

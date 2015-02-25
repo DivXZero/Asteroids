@@ -57,7 +57,7 @@ void ObjectCollection<T>::render()
 {
 	for (auto& obj : m_Objects)
 	{
-		if (obj->isAlive())
+		if (obj->isAlive() && obj->isVisible())
 			obj->render();
 	}
 }

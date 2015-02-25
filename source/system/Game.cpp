@@ -1,5 +1,6 @@
 
 #include "system/Game.h"
+#include "game/Rock.h"
 
 bool Game::init(Scene* scene)
 {
@@ -42,6 +43,7 @@ void Game::update()
 	//double alpha = m_accumulator / m_deltaTime;
 
 	scene()->renderScene();
+
 	m_Window.swapBuffers();
 }
 

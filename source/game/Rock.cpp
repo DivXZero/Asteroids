@@ -19,7 +19,7 @@ sf::Vector2f getRandomPosition(int w, int h)
 
 void Rock::set(float scale)
 {
-	set(scale, getRandomPosition((int)scene()->window()->getWidth(), (int)scene()->window()->getHeight()), glm::linearRand(0, 360));
+	set(scale, getRandomPosition((int)scene()->window()->getWidth(), (int)scene()->window()->getHeight()), (float)glm::linearRand(0, 360));
 }
 
 void Rock::set(float scale, sf::Vector2f pos, float angle)
